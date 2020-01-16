@@ -12,6 +12,7 @@ import aplicacion.controlador.Registro;
 import aplicacion.controlador.Validacion;
 import aplicacion.modelo.dao.AltasBajasDAO;
 import aplicacion.modelo.dao.CalculoDAO;
+import aplicacion.modelo.dao.MyBatisUtil;
 import aplicacion.modelo.dao.UsuarioDAO;
 import aplicacion.modelo.dao.ValidacionDAO;
 import aplicacion.modelo.ejb.MailEJB;
@@ -31,6 +32,7 @@ public class LogSingleton {
 	private Logger loggerBaja = LoggerFactory.getLogger(Baja.class);
 	private Logger loggerAltasBajasDAO = LoggerFactory.getLogger(AltasBajasDAO.class);
 	private Logger loggerTimerSingleton = LoggerFactory.getLogger(TimerSingleton.class);
+	private Logger loggerMyBatisUtil = LoggerFactory.getLogger(MyBatisUtil.class);
 
 	/**
 	 * Constructor privado
@@ -162,6 +164,10 @@ public class LogSingleton {
 	 */
 	public Logger getLoggerTimerSingleton() {
 		return loggerTimerSingleton;
+	}
+
+	public Logger getLoggerMyBatisUtil() {
+		return loggerMyBatisUtil;
 	}
 
 }
