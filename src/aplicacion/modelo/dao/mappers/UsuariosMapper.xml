@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='aplicacion.modelo.dao.mappers.UsuariosMapper'>
+
+	<resultMap type='Usuario' id='UsuariosResult'>
+		<id property='id' column='id' />
+		<result property='correo' column='correo' />
+		<result property='nombre' column='nombre' />
+		<result property='password' column='password' />
+		<result property='foto' column='foto' />
+		<result property='validado' column='validado' />
+		<result property='fechaRegistro' column='fechaRegistro' />
+	</resultMap>
+
+	<select id='getUsuarios' resultMap='UsuariosResult'>
+		SELECT * FROM usuario
+	</select>
+
+	<insert id='insertUsuario' parameterType='Usuario' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
+		VALUES(#{correo},#{nombre},#{password},#{foto},#{validado},#{fechaRegistro})
+	</insert>
+
+	<delete id='deleteUsuario'>
+		DELETE FROM usuario WHERE id = #{id}
+	</delete>
+
+	<select id='getUsuario' resultType='Usuario'>
+		SELECT * FROM usuario WHERE id = #{id}
+	</select>
+</mapper>
