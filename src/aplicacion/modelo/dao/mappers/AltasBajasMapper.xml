@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='aplicacion.modelo.dao.mappers.AltasBajasMapper'>
+
+	<resultMap type='AltaBaja' id='AltasBajasResult'>
+		<id property='id' column='id' />
+		<result property='correo' column='correo' />
+		<result property='nombre' column='nombre' />
+		<result property='tipoAccion' column='tipoAccion' />
+		<result property='fecha' column='fecha' />
+	</resultMap>
+
+	<select id='getAltasBajas' resultMap='AltasBajasResult'>
+		SELECT * FROM altas_bajas
+	</select>
+
+	<insert id='insertAltaBaja' parameterType='AltaBaja' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO altas_bajas (correo,nombre,tipoAccion,fecha)
+		VALUES(#{correo},#{nombre},#{tipoAccion},#{fecha})
+	</insert>
+
+	<delete id='deleteAltaBaja'>
+		DELETE FROM altas_bajas WHERE id = #{id}
+	</delete>
+
+	<select id='getAltaBaja' resultType='AltaBaja'>
+		SELECT * FROM equipo WHERE id = #{id}
+	</select>
+</mapper>
