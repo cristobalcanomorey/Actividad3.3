@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='aplicacion.modelo.dao.mappers.CalculosMapper'>
+	<resultMap type='Calculo' id='CalculosResult'>
+		<id property='id' column='id' />
+		<result property='estatura' column='estatura' />
+		<result property='peso' column='peso' />
+		<result property='fecha' column='fecha' />
+		<result property='idUsuario' column='isUsuario' />
+	</resultMap>
+	
+	<select id='getHistorial' parameterType='Usuario' resultMap='CalculosResult'>
+		SELECT * FROM calculo WHERE idUsuario = #{usuario}
+	</select>
+	
+	<insert id='insertCalculo' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO usuario (estatura,peso,fecha,idUsuario)
+		VALUES(#{calculo.estatura},#{calculo.peso},#{fecha},#{usuario.id})
+	</insert>
+</mapper>

@@ -23,6 +23,10 @@
 		VALUES(#{correo},#{nombre},#{password},#{foto},#{validado},#{fechaRegistro})
 	</insert>
 
+	<select id='existeUsuario' resultType='Usuario'>
+		SELECT * FROM usuario WHERE correo = #{correo} AND password = #{paswd}
+	</select>
+	
 	<delete id='deleteUsuario'>
 		DELETE FROM usuario WHERE id = #{id}
 	</delete>
