@@ -1,9 +1,6 @@
 package aplicacion.modelo.dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.naming.NamingException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -51,33 +48,41 @@ public class CalculoDAO {
 	 * @param calculo Calculo realizado.
 	 */
 	public static void insertCalculo(Usuario usuario, Calculo calculo) {
-		String query = "INSERT INTO calculo (estatura,peso,fecha,idUsuario) values ('" + calculo.getEstatura() + "','"
-				+ calculo.getPeso() + "','" + CalculosEJB.fechaAString(calculo.getFecha()) + "','" + usuario.getId()
-				+ "')";
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-			if (CON.getConnection() != null) {
-				CON.setStatement();
-				CON.getStatement().executeUpdate(query);
-			}
-		} catch (ClassNotFoundException | SQLException | NamingException e) {
-			LOG.error("ERROR CALCULO DAO: ", e);
+			CalculosMapper calculosMapper = sqlSession.getMapper(CalculosMapper.class);
+			calculosMapper.insertCalculo(usuario, calculo, CalculosEJB.fechaAString(calculo.getFecha()));
+			sqlSession.commit();
 		} finally {
-			if (CON.getStatement() != null) {
-				try {
-					CON.getConnection().close();
-				} catch (SQLException e) {
-					LOG.error("ERROR CALCULO DAO: ", e);
-				}
-			}
-			if (CON.getConnection() != null) {
-				try {
-					CON.getConnection().close();
-				} catch (SQLException e) {
-					LOG.error("ERROR CALCULO DAO: ", e);
-				}
-			}
+			sqlSession.close();
 		}
+//		String query = "INSERT INTO calculo (estatura,peso,fecha,idUsuario) values ('" + calculo.getEstatura() + "','"
+//				+ calculo.getPeso() + "','" + CalculosEJB.fechaAString(calculo.getFecha()) + "','" + usuario.getId()
+//				+ "')";
+//		try {
+//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
+//			if (CON.getConnection() != null) {
+//				CON.setStatement();
+//				CON.getStatement().executeUpdate(query);
+//			}
+//		} catch (ClassNotFoundException | SQLException | NamingException e) {
+//			LOG.error("ERROR CALCULO DAO: ", e);
+//		} finally {
+//			if (CON.getStatement() != null) {
+//				try {
+//					CON.getConnection().close();
+//				} catch (SQLException e) {
+//					LOG.error("ERROR CALCULO DAO: ", e);
+//				}
+//			}
+//			if (CON.getConnection() != null) {
+//				try {
+//					CON.getConnection().close();
+//				} catch (SQLException e) {
+//					LOG.error("ERROR CALCULO DAO: ", e);
+//				}
+//			}
+//		}
 
 	}
 

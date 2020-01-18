@@ -16,7 +16,7 @@
 	</select>
 	
 	<insert id='insertCalculo' useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO usuario (estatura,peso,fecha,idUsuario)
+		INSERT INTO calculo (estatura,peso,fecha,idUsuario)
 		VALUES(#{calculo.estatura},#{calculo.peso},#{fecha},#{usuario.id})
 	</insert>
 </mapper>
