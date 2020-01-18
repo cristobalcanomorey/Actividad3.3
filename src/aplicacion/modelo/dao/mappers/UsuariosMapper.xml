@@ -14,24 +14,36 @@
 		<result property='fechaRegistro' column='fechaRegistro' />
 	</resultMap>
 
-	<select id='getUsuarios' resultMap='UsuariosResult'>
-		SELECT * FROM usuario
-	</select>
-
-	<insert id='insertUsuario' parameterType='Usuario' useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-		VALUES(#{correo},#{nombre},#{password},#{foto},#{validado},#{fechaRegistro})
-	</insert>
-
 	<select id='existeUsuario' resultType='Usuario'>
 		SELECT * FROM usuario WHERE correo = #{correo} AND password = #{paswd}
 	</select>
 	
-	<delete id='deleteUsuario'>
+	<select id='existeUsuario' resultType='Usuario'>
+		SELECT * FROM usuario WHERE correo = #{correo}
+	</select>
+	
+	<insert id='insertUsuario' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
+		VALUES(#{usuario.correo},#{usuario.nombre},#{usuario.password},#{usuario.foto},#{esValidado},#{fecha})
+	</insert>
+	
+	<update id='validarPorId'>
+		UPDATE usuario
+		SET
+		validado=1
+		WHERE id = #{idUsuario}
+	</update>
+	
+	<delete id='deleteUsuario' parameterType='Usuario'>
 		DELETE FROM usuario WHERE id = #{id}
 	</delete>
-
-	<select id='getUsuario' resultType='Usuario'>
-		SELECT * FROM usuario WHERE id = #{id}
+	
+	<select id='existeUsuario'>
+		SELECT * FROM usuario WHERE id = #{idUsuario}
 	</select>
+	
+	<delete id='limpiar' parameterType='Usuario'>
+		DELETE FROM usuario WHERE validado = 0
+	</delete>
+	
 </mapper>

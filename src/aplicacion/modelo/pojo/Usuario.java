@@ -14,6 +14,9 @@ public class Usuario {
 	private Date fechaRegistro;
 	private ArrayList<Calculo> calculos = null;
 
+	public Usuario() {
+	}
+
 	public Usuario(Integer id, String correo, String nombre, String password, String foto, boolean validado,
 			Date fechaRegistro) {
 		this.id = id;
