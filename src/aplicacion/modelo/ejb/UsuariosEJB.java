@@ -16,7 +16,7 @@ import aplicacion.modelo.dao.UsuarioDAO;
 import aplicacion.modelo.dao.ValidacionDAO;
 import aplicacion.modelo.pojo.Mail;
 import aplicacion.modelo.pojo.Usuario;
-import aplicacion.vista.Tag;
+import aplicacion.vista.html.especificos.Tag;
 
 @Stateless
 @LocalBean
