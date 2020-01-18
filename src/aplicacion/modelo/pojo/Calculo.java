@@ -10,6 +10,9 @@ public class Calculo {
 	private Float imc;
 	private Date fecha;
 
+	public Calculo() {
+	}
+
 	public Calculo(Integer id, Float estatura, Float peso, Date fecha) {
 		this.id = id;
 		this.estatura = estatura;

@@ -12,7 +12,7 @@
 	</resultMap>
 	
 	<select id='getHistorial' parameterType='Usuario' resultMap='CalculosResult'>
-		SELECT * FROM calculo WHERE idUsuario = #{usuario}
+		SELECT * FROM calculo WHERE idUsuario = #{id}
 	</select>
 	
 	<insert id='insertCalculo' useGeneratedKeys='true' keyProperty='id'>

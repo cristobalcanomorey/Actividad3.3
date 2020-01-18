@@ -20,9 +20,9 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource='aplicacion/modelo/dao/mappers/AltaBajaMapper.xml' />
-		<mapper resource='aplicacion/modelo/dao/mappers/CalculoMapper.xml' />
-		<mapper resource='aplicacion/modelo/dao/mappers/MailMapper.xml' />
-		<mapper resource='aplicacion/modelo/dao/mappers/UsuarioMapper.xml' />
+		<mapper resource='aplicacion/modelo/dao/mappers/AltasBajasMapper.xml' />
+		<mapper resource='aplicacion/modelo/dao/mappers/CalculosMapper.xml' />
+<!-- 		<mapper resource='aplicacion/modelo/dao/mappers/MailMapper.xml' /> -->
+		<mapper resource='aplicacion/modelo/dao/mappers/UsuariosMapper.xml' />
 	</mappers>
 </configuration>
