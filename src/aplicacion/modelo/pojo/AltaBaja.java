@@ -10,6 +10,10 @@ public class AltaBaja {
 	private String tipoAccion;
 	private Date fecha;
 
+	public AltaBaja() {
+
+	}
+
 	public AltaBaja(Integer id, String correo, String nombre, String tipoAccion, Date fecha) {
 		this.id = id;
 		this.correo = correo;

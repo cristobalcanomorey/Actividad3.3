@@ -1,10 +1,5 @@
 package aplicacion.modelo.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.naming.NamingException;
-
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 
@@ -39,32 +34,6 @@ public class ValidacionDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		String queryValidacion = "INSERT INTO validacion (codigo,idUsuario) VALUES ('" + codigo + "','"
-//				+ usuario.getId().toString() + "')";
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				CON.getStatement().executeUpdate(queryValidacion);
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR VALIDACION DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR VALIDACION DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR VALIDACION DAO: ", e);
-//				}
-//			}
-//		}
 	}
 
 	/***
@@ -74,41 +43,48 @@ public class ValidacionDAO {
 	 * @return Id del usuario.
 	 */
 	public static String selectIdUsuario(String codigo) {
-		String idUsuario = null;
-		if (codigo != null) {
-			String query = "SELECT * FROM validacion WHERE codigo='" + codigo + "'";
-			try {
-				CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-				if (CON.getConnection() != null) {
-					CON.setStatement();
-					ResultSet rs = CON.getStatement().executeQuery(query);
-					rs.last();
-					if (rs.getRow() > 0) {
-						rs.first();
-						idUsuario = rs.getString("idUsuario");
-					}
-					rs.close();
-				}
-			} catch (ClassNotFoundException | SQLException | NamingException e) {
-				LOG.error("ERROR VALIDACION DAO: ", e);
-			} finally {
-				if (CON.getStatement() != null) {
-					try {
-						CON.getConnection().close();
-					} catch (SQLException e) {
-						LOG.error("ERROR VALIDACION DAO: ", e);
-					}
-				}
-				if (CON.getConnection() != null) {
-					try {
-						CON.getConnection().close();
-					} catch (SQLException e) {
-						LOG.error("ERROR VALIDACION DAO: ", e);
-					}
-				}
-			}
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ValidacionesMapper validacionesMapper = sqlSession.getMapper(ValidacionesMapper.class);
+			return validacionesMapper.selectIdUsuario(codigo);
+		} finally {
+			sqlSession.close();
 		}
-		return idUsuario;
+//		String idUsuario = null;
+//		if (codigo != null) {
+//			String query = "SELECT * FROM validacion WHERE codigo='" + codigo + "'";
+//			try {
+//				CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
+//				if (CON.getConnection() != null) {
+//					CON.setStatement();
+//					ResultSet rs = CON.getStatement().executeQuery(query);
+//					rs.last();
+//					if (rs.getRow() > 0) {
+//						rs.first();
+//						idUsuario = rs.getString("idUsuario");
+//					}
+//					rs.close();
+//				}
+//			} catch (ClassNotFoundException | SQLException | NamingException e) {
+//				LOG.error("ERROR VALIDACION DAO: ", e);
+//			} finally {
+//				if (CON.getStatement() != null) {
+//					try {
+//						CON.getConnection().close();
+//					} catch (SQLException e) {
+//						LOG.error("ERROR VALIDACION DAO: ", e);
+//					}
+//				}
+//				if (CON.getConnection() != null) {
+//					try {
+//						CON.getConnection().close();
+//					} catch (SQLException e) {
+//						LOG.error("ERROR VALIDACION DAO: ", e);
+//					}
+//				}
+//			}
+//		}
+//		return idUsuario;
 	}
 
 	/***
@@ -118,31 +94,39 @@ public class ValidacionDAO {
 	 */
 	public static void borrar(String codigo) {
 		if (codigo != null) {
-			String query = "DELETE FROM validacion WHERE codigo='" + codigo + "'";
+			SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 			try {
-				CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-				if (CON.getConnection() != null) {
-					CON.setStatement();
-					CON.getStatement().executeUpdate(query);
-				}
-			} catch (ClassNotFoundException | SQLException | NamingException e) {
-				LOG.error("ERROR VALIDACION DAO: ", e);
+				ValidacionesMapper validacionesMapper = sqlSession.getMapper(ValidacionesMapper.class);
+				validacionesMapper.borrar(codigo);
+				sqlSession.commit();
 			} finally {
-				if (CON.getStatement() != null) {
-					try {
-						CON.getConnection().close();
-					} catch (SQLException e) {
-						LOG.error("ERROR VALIDACION DAO: ", e);
-					}
-				}
-				if (CON.getConnection() != null) {
-					try {
-						CON.getConnection().close();
-					} catch (SQLException e) {
-						LOG.error("ERROR VALIDACION DAO: ", e);
-					}
-				}
+				sqlSession.close();
 			}
+//			String query = "DELETE FROM validacion WHERE codigo='" + codigo + "'";
+//			try {
+//				CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
+//				if (CON.getConnection() != null) {
+//					CON.setStatement();
+//					CON.getStatement().executeUpdate(query);
+//				}
+//			} catch (ClassNotFoundException | SQLException | NamingException e) {
+//				LOG.error("ERROR VALIDACION DAO: ", e);
+//			} finally {
+//				if (CON.getStatement() != null) {
+//					try {
+//						CON.getConnection().close();
+//					} catch (SQLException e) {
+//						LOG.error("ERROR VALIDACION DAO: ", e);
+//					}
+//				}
+//				if (CON.getConnection() != null) {
+//					try {
+//						CON.getConnection().close();
+//					} catch (SQLException e) {
+//						LOG.error("ERROR VALIDACION DAO: ", e);
+//					}
+//				}
+//			}
 		}
 	}
 }

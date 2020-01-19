@@ -7,15 +7,19 @@
 <!-- 	<select id='loginUsuario' resultType='Usuario'> -->
 <!-- 		SELECT * FROM usuario WHERE correo = #{correo} AND password = #{paswd} -->
 <!-- 	</select> -->
-	
-<!-- 	<select id='existeUsuario' resultType='Usuario'> -->
-<!-- 		SELECT * FROM usuario WHERE correo = #{correo} -->
-<!-- 	</select> -->
-	
+		
 	<insert id='insertValidacion'>
 		INSERT INTO validacion (codigo,idUsuario)
 		VALUES(#{codigo},#{idUsuario})
 	</insert>
+	
+	<select id='selectIdUsuario' resultType='string'>
+		SELECT * FROM validacion WHERE codigo = #{codigo}
+	</select>
+	
+	<delete id="borrar">
+		DELETE FROM validacion WHERE codigo= #{codigo}
+	</delete>
 	
 <!-- 	<update id='validarPorId'> -->
 <!-- 		UPDATE usuario -->

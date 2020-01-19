@@ -12,24 +12,24 @@
 		<result property='fecha' column='fecha' />
 	</resultMap>
 
+	<insert id='registrarValidacion' parameterType='map' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO altas_bajas (correo,nombre,tipoAccion,fecha)
+		VALUES(#{correo},#{nombre},#{tipoAccion},#{fecha})
+	</insert>
+	
 	<select id='getAltasBajas' resultMap='AltasBajasResult'>
 		SELECT * FROM altas_bajas
 	</select>
 
-	<insert id='insertAltaBaja' parameterType='AltaBaja' useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO altas_bajas (correo,nombre,tipoAccion,fecha)
-		VALUES(#{correo},#{nombre},#{tipoAccion},#{fecha})
-	</insert>
-
-	<delete id='deleteAltaBaja'>
-		DELETE FROM altas_bajas WHERE id = #{id}
-	</delete>
+<!-- 	<delete id='deleteAltaBaja'> -->
+<!-- 		DELETE FROM altas_bajas WHERE id = #{id} -->
+<!-- 	</delete> -->
 	
 	<delete id="vaciar">
 		TRUNCATE TABLE altas_bajas
 	</delete>
 
-	<select id='getAltaBaja' resultType='AltaBaja'>
-		SELECT * FROM altas_bajas WHERE id = #{id}
-	</select>
+<!-- 	<select id='getAltaBaja' resultType='AltaBaja'> -->
+<!-- 		SELECT * FROM altas_bajas WHERE id = #{id} -->
+<!-- 	</select> -->
 </mapper>
