@@ -3,10 +3,6 @@
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
 <mapper namespace='aplicacion.modelo.dao.mappers.ValidacionesMapper'>
-
-<!-- 	<select id='loginUsuario' resultType='Usuario'> -->
-<!-- 		SELECT * FROM usuario WHERE correo = #{correo} AND password = #{paswd} -->
-<!-- 	</select> -->
 		
 	<insert id='insertValidacion'>
 		INSERT INTO validacion (codigo,idUsuario)
@@ -20,24 +16,5 @@
 	<delete id="borrar">
 		DELETE FROM validacion WHERE codigo= #{codigo}
 	</delete>
-	
-<!-- 	<update id='validarPorId'> -->
-<!-- 		UPDATE usuario -->
-<!-- 		SET -->
-<!-- 		validado=1 -->
-<!-- 		WHERE id = #{idUsuario} -->
-<!-- 	</update> -->
-	
-<!-- 	<delete id='deleteUsuario' parameterType='Usuario'> -->
-<!-- 		DELETE FROM usuario WHERE id = #{id} -->
-<!-- 	</delete> -->
-	
-<!-- 	<select id='selectPorId'> -->
-<!-- 		SELECT * FROM usuario WHERE id = #{idUsuario} -->
-<!-- 	</select> -->
-	
-<!-- 	<delete id='limpiar' parameterType='Usuario'> -->
-<!-- 		DELETE FROM usuario WHERE validado = 0 -->
-<!-- 	</delete> -->
 	
 </mapper>
