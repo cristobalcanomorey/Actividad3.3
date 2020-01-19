@@ -34,8 +34,8 @@ public class UsuariosEJB {
 	 * @param paswd
 	 * @return Usuario con esos datos.
 	 */
-	public Usuario existeUsuario(String correo, String paswd) {
-		return UsuarioDAO.existeUsuario(correo, paswd);
+	public Usuario loginUsuario(String correo, String paswd) {
+		return UsuarioDAO.loginUsuario(correo, paswd);
 	}
 
 	/***
@@ -111,7 +111,7 @@ public class UsuariosEJB {
 	public boolean registrarUsuario(Usuario nuevo) {
 		String codigo = codigoAleatorio();
 		UsuarioDAO.insertUsuario(nuevo);
-		Usuario usu = UsuarioDAO.existeUsuario(nuevo.getCorreo(), nuevo.getPassword());
+		Usuario usu = UsuarioDAO.loginUsuario(nuevo.getCorreo(), nuevo.getPassword());
 		ValidacionDAO.insertValidacion(usu, codigo);
 		return enviarCorreo(usu, codigo);
 	}
@@ -127,8 +127,8 @@ public class UsuariosEJB {
 		Mail correo = mailEJB.getMail("smtp.gmail.com", 587, "imcpractica@gmail.com", "contrasenyaimc");
 		Tag enlace = new Tag("a", "Haz clic aquí para validar tu cuenta.", true, true);
 		enlace.prepararAtributos();
-		enlace.addAtributo("href", "http://localhost:8080/Actividad3.1IMC/Validacion?codigo=" + codigo);
-		return mailEJB.sendMail(nuevo.getCorreo(), "Validar tu cuenta en Actividad3.1IMC", enlace.toString(), correo);
+		enlace.addAtributo("href", "http://localhost:8080/Actividad3.3/Validacion?codigo=" + codigo);
+		return mailEJB.sendMail(nuevo.getCorreo(), "Validar tu cuenta en Actividad3.3", enlace.toString(), correo);
 	}
 
 	/***

@@ -5,10 +5,12 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 
 import aplicacion.modelo.JDBCSingleton;
 import aplicacion.modelo.LogSingleton;
+import aplicacion.modelo.dao.mappers.ValidacionesMapper;
 import aplicacion.modelo.pojo.Usuario;
 
 /***
@@ -29,32 +31,40 @@ public class ValidacionDAO {
 	 * @param codigo  Codigo del usuario.
 	 */
 	public static void insertValidacion(Usuario usuario, String codigo) {
-		String queryValidacion = "INSERT INTO validacion (codigo,idUsuario) VALUES ('" + codigo + "','"
-				+ usuario.getId().toString() + "')";
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-			if (CON.getConnection() != null) {
-				CON.setStatement();
-				CON.getStatement().executeUpdate(queryValidacion);
-			}
-		} catch (ClassNotFoundException | SQLException | NamingException e) {
-			LOG.error("ERROR VALIDACION DAO: ", e);
+			ValidacionesMapper validacionesMapper = sqlSession.getMapper(ValidacionesMapper.class);
+			validacionesMapper.insertValidacion(codigo, usuario.getId().toString());
+			sqlSession.commit();
 		} finally {
-			if (CON.getStatement() != null) {
-				try {
-					CON.getConnection().close();
-				} catch (SQLException e) {
-					LOG.error("ERROR VALIDACION DAO: ", e);
-				}
-			}
-			if (CON.getConnection() != null) {
-				try {
-					CON.getConnection().close();
-				} catch (SQLException e) {
-					LOG.error("ERROR VALIDACION DAO: ", e);
-				}
-			}
+			sqlSession.close();
 		}
+//		String queryValidacion = "INSERT INTO validacion (codigo,idUsuario) VALUES ('" + codigo + "','"
+//				+ usuario.getId().toString() + "')";
+//		try {
+//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
+//			if (CON.getConnection() != null) {
+//				CON.setStatement();
+//				CON.getStatement().executeUpdate(queryValidacion);
+//			}
+//		} catch (ClassNotFoundException | SQLException | NamingException e) {
+//			LOG.error("ERROR VALIDACION DAO: ", e);
+//		} finally {
+//			if (CON.getStatement() != null) {
+//				try {
+//					CON.getConnection().close();
+//				} catch (SQLException e) {
+//					LOG.error("ERROR VALIDACION DAO: ", e);
+//				}
+//			}
+//			if (CON.getConnection() != null) {
+//				try {
+//					CON.getConnection().close();
+//				} catch (SQLException e) {
+//					LOG.error("ERROR VALIDACION DAO: ", e);
+//				}
+//			}
+//		}
 	}
 
 	/***

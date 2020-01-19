@@ -24,5 +24,6 @@
 		<mapper resource='aplicacion/modelo/dao/mappers/CalculosMapper.xml' />
 <!-- 		<mapper resource='aplicacion/modelo/dao/mappers/MailMapper.xml' /> -->
 		<mapper resource='aplicacion/modelo/dao/mappers/UsuariosMapper.xml' />
+		<mapper resource='aplicacion/modelo/dao/mappers/ValidacionesMapper.xml' />
 	</mappers>
 </configuration>

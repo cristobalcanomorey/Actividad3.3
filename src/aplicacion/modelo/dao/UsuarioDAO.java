@@ -1,12 +1,10 @@
 package aplicacion.modelo.dao;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
 
-import aplicacion.modelo.JDBCSingleton;
-import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.dao.mappers.UsuariosMapper;
 import aplicacion.modelo.ejb.UsuariosEJB;
 import aplicacion.modelo.pojo.Usuario;
@@ -19,9 +17,6 @@ import aplicacion.modelo.pojo.Usuario;
  */
 public class UsuarioDAO {
 
-	private static final Logger LOG = LogSingleton.getInstance().getLoggerUsuarioDAO();
-	private static final JDBCSingleton CON = JDBCSingleton.getInstance();
-
 	/***
 	 * Comprueba si existe un usuario y devuelve su información
 	 * 
@@ -29,56 +24,18 @@ public class UsuarioDAO {
 	 * @param paswd  La contraseña del usuario
 	 * @return Un objeto Usuario con la información del usuario si existe o null.
 	 */
-	public static Usuario existeUsuario(String correo, String paswd) {
+	public static Usuario loginUsuario(String correo, String paswd) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		Usuario usuario = null;
 		try {
 			UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
 			if (correo != null && paswd != null) {
-				usuario = usuariosMapper.existeUsuario(correo, paswd);
+				usuario = usuariosMapper.loginUsuario(correo, paswd);
 			}
 			return usuario;
 		} finally {
 			sqlSession.close();
 		}
-//		Usuario usuario = null;
-//
-//		if (correo != null && paswd != null) {
-//			String query = "SELECT * FROM usuario WHERE correo='" + correo + "' AND password='" + paswd + "'";
-//			try {
-//				CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//				if (CON.getConnection() != null) {
-//					CON.setStatement();
-//					ResultSet rs = CON.getStatement().executeQuery(query);
-//					rs.last();
-//					if (rs.getRow() > 0) {
-//						rs.first();
-//						usuario = new Usuario(rs.getInt("id"), rs.getString("correo"), rs.getString("nombre"),
-//								rs.getString("password"), rs.getString("foto"), rs.getBoolean("validado"),
-//								rs.getDate("fechaRegistro"));
-//					}
-//					rs.close();
-//				}
-//			} catch (ClassNotFoundException | SQLException | NamingException e) {
-//				LOG.error("ERROR USUARIO DAO: ", e);
-//			} finally {
-//				if (CON.getStatement() != null) {
-//					try {
-//						CON.getConnection().close();
-//					} catch (SQLException e) {
-//						LOG.error("ERROR USUARIO DAO: ", e);
-//					}
-//				}
-//				if (CON.getConnection() != null) {
-//					try {
-//						CON.getConnection().close();
-//					} catch (SQLException e) {
-//						LOG.error("ERROR USUARIO DAO: ", e);
-//					}
-//				}
-//			}
-//		}
-//		return usuario;
 	}
 
 	/***
@@ -99,39 +56,6 @@ public class UsuarioDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		if (correo != null) {
-//			String query = "SELECT * FROM usuario WHERE correo='" + correo + "'";
-//			try {
-//				CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//				if (CON.getConnection() != null) {
-//					CON.setStatement();
-//					ResultSet rs = CON.getStatement().executeQuery(query);
-//					rs.last();
-//					if (rs.getRow() > 0) {
-//						existe = true;
-//					}
-//					rs.close();
-//				}
-//			} catch (ClassNotFoundException | SQLException | NamingException e) {
-//				LOG.error("ERROR USUARIO DAO: ", e);
-//			} finally {
-//				if (CON.getStatement() != null) {
-//					try {
-//						CON.getConnection().close();
-//					} catch (SQLException e) {
-//						LOG.error("ERROR USUARIO DAO: ", e);
-//					}
-//				}
-//				if (CON.getConnection() != null) {
-//					try {
-//						CON.getConnection().close();
-//					} catch (SQLException e) {
-//						LOG.error("ERROR USUARIO DAO: ", e);
-//					}
-//				}
-//			}
-//		}
-//		return existe;
 	}
 
 	/***
@@ -142,40 +66,20 @@ public class UsuarioDAO {
 	public static void insertUsuario(Usuario nuevo) {
 		int esValidado = nuevo.isValidado() ? 1 : 0;
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		Map<String, Object> usuario = new HashMap<String, Object>();
+		usuario.put("correo", nuevo.getCorreo());
+		usuario.put("nombre", nuevo.getNombre());
+		usuario.put("password", nuevo.getPassword());
+		usuario.put("foto", nuevo.getFoto());
+		usuario.put("esValidado", esValidado);
+		usuario.put("fecha", UsuariosEJB.fechaAString(nuevo.getFechaRegistro()));
 		try {
 			UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
-			usuariosMapper.insertUsuario(nuevo, esValidado, UsuariosEJB.fechaAString(new Date()));
+			usuariosMapper.insertUsuario(usuario);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
-//		String queryUsuario = "INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro) VALUES ('"
-//				+ nuevo.getCorreo() + "','" + nuevo.getNombre() + "','" + nuevo.getPassword() + "','" + nuevo.getFoto()
-//				+ "','" + esValidado + "','" + UsuariosEJB.fechaAString(new Date()) + "')";
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				CON.getStatement().executeUpdate(queryUsuario);
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR USUARIO DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//		}
 
 	}
 
@@ -193,31 +97,6 @@ public class UsuarioDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		String update = "UPDATE usuario SET validado=1 WHERE id=" + idUsuario;
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				CON.getStatement().executeUpdate(update);
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR USUARIO DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//		}
 	}
 
 	/***
@@ -234,31 +113,6 @@ public class UsuarioDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		String delete = "DELETE FROM usuario WHERE id=" + usuario.getId().toString();
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				CON.getStatement().executeUpdate(delete);
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR USUARIO DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//		}
 	}
 
 	/***
@@ -277,40 +131,6 @@ public class UsuarioDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		String query = "SELECT * FROM usuario WHERE id=" + idUsuario;
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				ResultSet rs = CON.getStatement().executeQuery(query);
-//				rs.last();
-//				if (rs.getRow() > 0) {
-//					rs.first();
-//					usu = new Usuario(rs.getInt("id"), rs.getString("correo"), rs.getString("nombre"),
-//							rs.getString("password"), rs.getString("foto"), rs.getBoolean("validado"),
-//							rs.getDate("fechaRegistro"));
-//				}
-//				rs.close();
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR USUARIO DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//		}
-//		return usu;
 	}
 
 	/***
@@ -325,30 +145,5 @@ public class UsuarioDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		String delete = "DELETE FROM usuario WHERE validado=0";
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				CON.getStatement().executeUpdate(delete);
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR USUARIO DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR USUARIO DAO: ", e);
-//				}
-//			}
-//		}
 	}
 }

@@ -80,7 +80,7 @@ public class Login extends HttpServlet {
 		String correo = request.getParameter("correo");
 		String paswd = request.getParameter("paswd");
 
-		Usuario usuario = usuariosEJB.existeUsuario(correo, paswd);
+		Usuario usuario = usuariosEJB.loginUsuario(correo, paswd);
 		if (usuario == null) {
 			try {
 				response.sendRedirect("Login?error=1");

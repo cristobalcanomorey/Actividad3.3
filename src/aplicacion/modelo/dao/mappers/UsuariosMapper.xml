@@ -14,7 +14,7 @@
 		<result property='fechaRegistro' column='fechaRegistro' />
 	</resultMap>
 
-	<select id='existeUsuario' resultType='Usuario'>
+	<select id='loginUsuario' resultType='Usuario'>
 		SELECT * FROM usuario WHERE correo = #{correo} AND password = #{paswd}
 	</select>
 	
@@ -22,9 +22,9 @@
 		SELECT * FROM usuario WHERE correo = #{correo}
 	</select>
 	
-	<insert id='insertUsuario' useGeneratedKeys='true' keyProperty='id'>
+	<insert id='insertUsuario' parameterType='map' useGeneratedKeys='true' keyProperty='id'>
 		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-		VALUES(#{usuario.correo},#{usuario.nombre},#{usuario.password},#{usuario.foto},#{esValidado},#{fecha})
+		VALUES(#{correo},#{nombre},#{password},#{foto},#{esValidado},#{fecha})
 	</insert>
 	
 	<update id='validarPorId'>
@@ -34,11 +34,11 @@
 		WHERE id = #{idUsuario}
 	</update>
 	
-	<delete id='deleteUsuario' parameterType='Usuario'>
+	<delete id='delete' parameterType='Usuario'>
 		DELETE FROM usuario WHERE id = #{id}
 	</delete>
 	
-	<select id='existeUsuario'>
+	<select id='selectPorId' resultType='Usuario'>
 		SELECT * FROM usuario WHERE id = #{idUsuario}
 	</select>
 	
