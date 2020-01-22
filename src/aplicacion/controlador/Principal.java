@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,16 +48,29 @@ public class Principal extends HttpServlet {
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		response.setContentType("text/html; charset=UTF-8");
-		if (usuario != null) {
-			usuario.setCalculos(null);
-		}
-		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, null, false);
+		// Obtengo un dispatcher hacia el jsp
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Mostra.jsp");
+
+		// Añado el objeto a la petición
+		request.setAttribute("usuario", usuario);
+
+		// Hago un forward al jsp con el objeto ya dentro de la petición
 		try {
-			paginaPrincipal.print(response.getWriter());
-		} catch (IOException e) {
+			rs.forward(request, response);
+		} catch (ServletException | IOException e) {
 			log.getLoggerPrincipal().error("Se ha producido un error en GET Principal: ", e);
 		}
+
+//		response.setContentType("text/html; charset=UTF-8");
+//		if (usuario != null) {
+//			usuario.setCalculos(null);
+//		}
+//		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, null, false);
+//		try {
+//			paginaPrincipal.print(response.getWriter());
+//		} catch (IOException e) {
+//			log.getLoggerPrincipal().error("Se ha producido un error en GET Principal: ", e);
+//		}
 	}
 
 	/***
