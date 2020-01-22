@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Validación</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<ul id="navegacion">

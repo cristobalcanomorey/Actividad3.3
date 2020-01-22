@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Baja</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<ul id="navegacion">

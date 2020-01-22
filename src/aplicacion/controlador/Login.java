@@ -3,6 +3,8 @@ package aplicacion.controlador;
 import java.io.IOException;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,6 @@ import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.ejb.UsuariosEJB;
 import aplicacion.modelo.pojo.Usuario;
-import aplicacion.vista.PaginaLogin;
 
 /***
  * Servlet para iniciar sesión.
@@ -59,13 +60,25 @@ public class Login extends HttpServlet {
 					error = err2;
 				}
 			}
-			response.setContentType("text/html; charset=UTF-8");
-			PaginaLogin paginaLogin = new PaginaLogin(error);
+			// Obtengo un dispatcher hacia el jsp
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLogin.jsp");
+
+			// Añado el objeto a la petición
+			request.setAttribute("e", error);
+
+			// Hago un forward al jsp con el objeto ya dentro de la petición
 			try {
-				paginaLogin.print(response.getWriter());
-			} catch (IOException e) {
+				rs.forward(request, response);
+			} catch (ServletException | IOException e) {
 				log.getLoggerLogin().error("Se ha producido un error en GET de Login: ", e);
 			}
+//			response.setContentType("text/html; charset=UTF-8");
+//			PaginaLogin paginaLogin = new PaginaLogin(error);
+//			try {
+//				paginaLogin.print(response.getWriter());
+//			} catch (IOException e) {
+//				log.getLoggerLogin().error("Se ha producido un error en GET de Login: ", e);
+//			}
 		}
 	}
 

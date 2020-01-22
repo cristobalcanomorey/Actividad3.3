@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="javax.naming.InitialContext"%>
-<%@page import="javax.naming.Context"%>
-<%@page import="aplicacion.vista.Tag"%>
 <%@page import="aplicacion.vista.NavBar"%>
 <%@ page import="aplicacion.modelo.pojo.Usuario" %>
-<%@page import="aplicacion.modelo.ejb.UsuariosEJB"%>
-<%! Usuario usuario = null; %>
-<%!UsuariosEJB usuariosEJB; %>
+<%@page import="aplicacion.vista.Navegacion"%>
+<%!Usuario usuario = null; %>
 <%!String resul; %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>IMC</title>
-<link href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<%
@@ -21,25 +17,7 @@
 		resul = (String) request.getAttribute("imc");
 	%>
 	<%
-	NavBar navBar;
-	if(usuario == null){
-		navBar = new NavBar(null,null);
-		navBar.addRegistro();
-		navBar.addLogin();
-	} else{
-		Context context = null;
-		try{
-			context = new InitialContext();
-			usuariosEJB = (UsuariosEJB) context.lookup("java:global/Actividad3.3/UsuariosEJB");
-		}catch(Exception e){
-			
-		}
-		navBar = new NavBar(usuario.getNombre(),UsuariosEJB.getRutaFotoCompleta(usuario));
-		navBar.addLogout();
-		navBar.addHistorial();
-		navBar.addDarseDeBaja();
-	}
-	out.print(navBar.toString());
+	out.print(new Navegacion(usuario).toString());
 	%>
 	<h1>Calcular IMC</h1>
 	<form method="POST" action="Principal">

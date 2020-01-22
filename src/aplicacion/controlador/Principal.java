@@ -109,7 +109,7 @@ public class Principal extends HttpServlet {
 		try {
 			rs.forward(request, response);
 		} catch (ServletException | IOException e) {
-			log.getLoggerPrincipal().error("Se ha producido un error en GET Principal: ", e);
+			log.getLoggerPrincipal().error("Se ha producido un error en POST Principal: ", e);
 		}
 
 //		response.setContentType("text/html; charset=UTF-8");
