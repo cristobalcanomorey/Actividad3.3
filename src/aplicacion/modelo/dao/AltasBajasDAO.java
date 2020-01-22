@@ -43,33 +43,6 @@ public class AltasBajasDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		String insert = "INSERT INTO altas_bajas (correo,nombre,tipoAccion,fecha) VALUES ('" + usuario.getCorreo()
-//				+ "','" + usuario.getNombre() + "','V','" + CalculosEJB.fechaAString(new Date()) + "')";
-//
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				CON.getStatement().executeUpdate(insert);
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//				}
-//			}
-//		}
 	}
 
 	/***
@@ -93,39 +66,6 @@ public class AltasBajasDAO {
 			sqlSession.close();
 		}
 		return null;
-//		String query = "SELECT * FROM altas_bajas";
-//		ResultSet rs = null;
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				rs = CON.getStatement().executeQuery(query);
-//				rs.last();
-//				if (rs.getRow() > 0) {
-//					rs.beforeFirst();
-//					return rs;
-//				}
-//				rs.close();
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//				}
-//			}
-//		}
-//		return rs;
 	}
 
 	/***
@@ -140,31 +80,6 @@ public class AltasBajasDAO {
 		} finally {
 			sqlSession.close();
 		}
-//		String truncar = "TRUNCATE TABLE altas_bajas";
-//		try {
-//			CON.setConnection("java:/comp/env", "jdbc/ActividadIMC");
-//			if (CON.getConnection() != null) {
-//				CON.setStatement();
-//				CON.getStatement().executeUpdate(truncar);
-//			}
-//		} catch (ClassNotFoundException | SQLException | NamingException e) {
-//			LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//		} finally {
-//			if (CON.getStatement() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//				}
-//			}
-//			if (CON.getConnection() != null) {
-//				try {
-//					CON.getConnection().close();
-//				} catch (SQLException e) {
-//					LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
-//				}
-//			}
-//		}
 	}
 
 }
