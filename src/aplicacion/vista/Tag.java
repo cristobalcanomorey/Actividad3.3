@@ -1,4 +1,4 @@
-package aplicacion.vista.html.especificos;
+package aplicacion.vista;
 
 import java.util.ArrayList;
 import java.util.HashMap;

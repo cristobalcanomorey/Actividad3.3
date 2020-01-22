@@ -11,7 +11,6 @@ import aplicacion.vista.html.Header;
 import aplicacion.vista.html.especificos.Formulario;
 import aplicacion.vista.html.especificos.Html;
 import aplicacion.vista.html.especificos.Tabla;
-import aplicacion.vista.html.especificos.Tag;
 
 public class PaginaPrincipal {
 

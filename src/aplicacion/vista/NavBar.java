@@ -1,10 +1,6 @@
-package aplicacion.vista.html;
+package aplicacion.vista;
 
-import aplicacion.vista.Tag;
-import aplicacion.vista.html.especificos.Html;
-
-public class Header {
-
+public class NavBar {
 	private Tag logo;
 	private Tag usuario = null;
 	private Tag fotoPerfil = null;
@@ -21,7 +17,7 @@ public class Header {
 	 * @param nombreUsuario
 	 * @param rutaFotoPerfil
 	 */
-	public Header(String nombreUsuario, String rutaFotoPerfil) {
+	public NavBar(String nombreUsuario, String rutaFotoPerfil) {
 		if (nombreUsuario != null) {
 			this.usuario = new Tag(nombreUsuario);
 		}
@@ -75,7 +71,8 @@ public class Header {
 	 * @param pagina
 	 * @return Página Html con la cabecera
 	 */
-	public Html addAPagina(Html pagina) {
+	@Override
+	public String toString() {
 		Tag navBar = new Tag("ul", null, true, true);
 		navBar.prepararAtributos();
 		navBar.addAtributo("id", "navegacion");
@@ -103,7 +100,6 @@ public class Header {
 				navBar.addChild(Tag.incrustarEn(this.registro, "li"));
 			}
 		}
-		pagina.addABody(navBar);
-		return pagina;
+		return navBar.toString();
 	}
 }

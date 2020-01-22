@@ -2,6 +2,8 @@ package aplicacion.vista.html.especificos;
 
 import java.util.ArrayList;
 
+import aplicacion.vista.Tag;
+
 public class Tabla {
 
 	private Tag thead;

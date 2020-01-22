@@ -16,9 +16,9 @@ import aplicacion.modelo.dao.UsuarioDAO;
 import aplicacion.modelo.dao.ValidacionDAO;
 import aplicacion.modelo.pojo.Mail;
 import aplicacion.modelo.pojo.Usuario;
-import aplicacion.vista.html.especificos.Tag;
+import aplicacion.vista.Tag;
 
-@Stateless
+@Stateless(mappedName = "UsuariosEJB")
 @LocalBean
 public class UsuariosEJB {
 

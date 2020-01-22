@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import aplicacion.modelo.ejb.CalculosEJB;
 import aplicacion.modelo.pojo.AltaBaja;
 import aplicacion.vista.html.especificos.Tabla;
-import aplicacion.vista.html.especificos.Tag;
 
 public class MensajeAltasBajas {
 

@@ -6,7 +6,6 @@ import aplicacion.vista.html.Cuerpo;
 import aplicacion.vista.html.Header;
 import aplicacion.vista.html.especificos.Formulario;
 import aplicacion.vista.html.especificos.Html;
-import aplicacion.vista.html.especificos.Tag;
 
 public class PaginaBaja {
 	private Html pagina;

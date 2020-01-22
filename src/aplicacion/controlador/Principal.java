@@ -17,7 +17,6 @@ import aplicacion.modelo.ejb.CalculosEJB;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.pojo.Calculo;
 import aplicacion.modelo.pojo.Usuario;
-import aplicacion.vista.PaginaPrincipal;
 
 /***
  * Servlet para la página principal
@@ -49,7 +48,7 @@ public class Principal extends HttpServlet {
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
 		// Obtengo un dispatcher hacia el jsp
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Mostra.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaPrincipal.jsp");
 
 		// Añado el objeto a la petición
 		request.setAttribute("usuario", usuario);
@@ -99,13 +98,27 @@ public class Principal extends HttpServlet {
 			}
 		}
 
-		response.setContentType("text/html; charset=UTF-8");
-		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, imc, false);
+		// Obtengo un dispatcher hacia el jsp
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaPrincipal.jsp");
+
+		// Añado el objeto a la petición
+		request.setAttribute("usuario", usuario);
+		request.setAttribute("imc", imc);
+
+		// Hago un forward al jsp con el objeto ya dentro de la petición
 		try {
-			paginaPrincipal.print(response.getWriter());
-		} catch (IOException e) {
-			log.getLoggerPrincipal().error("Se ha producido un error en POST Principal:", e);
+			rs.forward(request, response);
+		} catch (ServletException | IOException e) {
+			log.getLoggerPrincipal().error("Se ha producido un error en GET Principal: ", e);
 		}
+
+//		response.setContentType("text/html; charset=UTF-8");
+//		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, imc, false);
+//		try {
+//			paginaPrincipal.print(response.getWriter());
+//		} catch (IOException e) {
+//			log.getLoggerPrincipal().error("Se ha producido un error en POST Principal:", e);
+//		}
 	}
 
 }
