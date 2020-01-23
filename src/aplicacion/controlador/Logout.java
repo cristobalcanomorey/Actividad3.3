@@ -35,7 +35,7 @@ public class Logout extends HttpServlet {
 		try {
 			response.sendRedirect("Principal");
 		} catch (IOException e) {
-			log.getLoggerLogout().error("Se ha producido un error en Get Logout: ", e);
+			log.getLoggerLogout().error("Se ha producido un error en GET Logout: ", e);
 		}
 	}
 

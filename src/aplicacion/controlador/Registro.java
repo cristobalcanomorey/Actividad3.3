@@ -52,7 +52,7 @@ public class Registro extends HttpServlet {
 			try {
 				response.sendRedirect("Principal");
 			} catch (IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en Get Registro: ", e);
+				log.getLoggerRegistro().error("Se ha producido un error en GET Registro: ", e);
 			}
 		} else {
 			// Obtengo un dispatcher hacia el jsp
@@ -85,7 +85,7 @@ public class Registro extends HttpServlet {
 				if (!response.isCommitted())
 					response.sendRedirect("Principal");
 			} catch (IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en Post Registro: ", e);
+				log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 			}
 		}
 		String uploadPath = getServletContext().getRealPath("") + File.separator + UsuariosEJB.getUploadDirectory();
@@ -105,14 +105,14 @@ public class Registro extends HttpServlet {
 					nuevo = new Usuario(correo, nombre, paswd, fPerfil, false, new Date());
 					correoEnviado = usuariosEJB.registrarUsuario(nuevo);
 				} catch (IOException | ServletException e) {
-					log.getLoggerRegistro().error("Se ha producido un error en Post Registro: ", e);
+					log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 				}
 			} else {
 				try {
 					if (!response.isCommitted())
 						response.sendRedirect("Registro?error=" + USUARIO_EXISTE);
 				} catch (IOException e) {
-					log.getLoggerRegistro().error("Se ha producido un error en Post Registro: ", e);
+					log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 				}
 			}
 		} else {
@@ -120,12 +120,12 @@ public class Registro extends HttpServlet {
 				if (!response.isCommitted())
 					response.sendRedirect("Registro?error=" + FALTAN_DATOS);
 			} catch (IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en Post Registro: ", e);
+				log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 			}
 		}
 
 		if (correoEnviado) {
-//			// Obtengo un dispatcher hacia el jsp
+			// Obtengo un dispatcher hacia el jsp
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaRegistro.jsp");
 			// Añado el objeto a la petición
 			request.setAttribute("enviado", "true");
@@ -141,7 +141,7 @@ public class Registro extends HttpServlet {
 				if (!response.isCommitted())
 					response.sendRedirect("Registro?error=" + ERROR_CORREO);
 			} catch (IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en Post Registro: ", e);
+				log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 			}
 		}
 	}

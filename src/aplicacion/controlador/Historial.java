@@ -63,12 +63,5 @@ public class Historial extends HttpServlet {
 		} catch (ServletException | IOException e) {
 			log.getLoggerPrincipal().error("Se ha producido un error en GET Historial: ", e);
 		}
-//		response.setContentType("text/html; charset=UTF-8");
-//		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, null, true);
-//		try {
-//			paginaPrincipal.print(response.getWriter());
-//		} catch (IOException e) {
-//			log.getLoggerHistorial().error("Se ha producido un error en GET Historial: ", e);
-//		}
 	}
 }

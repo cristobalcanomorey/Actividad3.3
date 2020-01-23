@@ -46,25 +46,18 @@ public class Validacion extends HttpServlet {
 				} catch (ServletException | IOException e) {
 					log.getLoggerPrincipal().error("Se ha producido un error en GET Validacion: ", e);
 				}
-//				response.setContentType("text/html; charset=UTF-8");
-//				PaginaValidacion paginaValidacion = new PaginaValidacion();
-//				try {
-//					paginaValidacion.print(response.getWriter());
-//				} catch (IOException e) {
-//					log.getLoggerValidacion().error("Se ha producido un error en Get Validacion: ", e);
-//				}
 			} else {
 				try {
 					response.sendRedirect("Principal");
 				} catch (IOException e) {
-					log.getLoggerValidacion().error("Se ha producido un error en Get Validacion: ", e);
+					log.getLoggerValidacion().error("Se ha producido un error en GET Validacion: ", e);
 				}
 			}
 		} else {
 			try {
 				response.sendRedirect("Principal");
 			} catch (IOException e) {
-				log.getLoggerValidacion().error("Se ha producido un error en Get Validacion: ", e);
+				log.getLoggerValidacion().error("Se ha producido un error en GET Validacion: ", e);
 			}
 		}
 	}

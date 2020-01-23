@@ -90,7 +90,7 @@ public class Principal extends HttpServlet {
 		// Obtengo un dispatcher hacia el jsp
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaPrincipal.jsp");
 
-		// Añado el objeto a la petición
+		// Añado los objetos a la petición
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("imc", imc);
 

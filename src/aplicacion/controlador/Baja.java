@@ -53,18 +53,11 @@ public class Baja extends HttpServlet {
 			} catch (ServletException | IOException e) {
 				log.getLoggerPrincipal().error("Se ha producido un error en GET Baja: ", e);
 			}
-//			response.setContentType("text/html; charset=UTF-8");
-//			PaginaBaja paginaBaja = new PaginaBaja();
-//			try {
-//				paginaBaja.print(response.getWriter());
-//			} catch (IOException e) {
-//				log.getLoggerBaja().error("Se ha producido un error en Get Baja: ", e);
-//			}
 		} else {
 			try {
 				response.sendRedirect("Principal");
 			} catch (IOException e) {
-				log.getLoggerBaja().error("Se ha producido un error en Get Baja: ", e);
+				log.getLoggerBaja().error("Se ha producido un error en GET Baja: ", e);
 			}
 		}
 	}
@@ -93,7 +86,7 @@ public class Baja extends HttpServlet {
 		try {
 			response.sendRedirect("Principal");
 		} catch (IOException e) {
-			log.getLoggerBaja().error("Se ha producido un error en Post Baja: ", e);
+			log.getLoggerBaja().error("Se ha producido un error en POST Baja: ", e);
 		}
 
 	}
