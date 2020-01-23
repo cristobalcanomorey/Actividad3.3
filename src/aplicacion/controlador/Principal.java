@@ -111,14 +111,6 @@ public class Principal extends HttpServlet {
 		} catch (ServletException | IOException e) {
 			log.getLoggerPrincipal().error("Se ha producido un error en POST Principal: ", e);
 		}
-
-//		response.setContentType("text/html; charset=UTF-8");
-//		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, imc, false);
-//		try {
-//			paginaPrincipal.print(response.getWriter());
-//		} catch (IOException e) {
-//			log.getLoggerPrincipal().error("Se ha producido un error en POST Principal:", e);
-//		}
 	}
 
 }

@@ -50,21 +50,8 @@ public class Login extends HttpServlet {
 				log.getLoggerLogin().error("Se ha producido un error en GET de Login: ", e);
 			}
 		} else {
-			String error = request.getParameter("error");
-			String err1 = "El correo o la contraseña no son correctos";
-			String err2 = "Esta cuenta aún no ha sido validada";
-			if (error != null) {
-				if (error.equals("1")) {
-					error = err1;
-				} else if (error.equals("2")) {
-					error = err2;
-				}
-			}
 			// Obtengo un dispatcher hacia el jsp
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLogin.jsp");
-
-			// Añado el objeto a la petición
-			request.setAttribute("e", error);
 
 			// Hago un forward al jsp con el objeto ya dentro de la petición
 			try {
@@ -72,13 +59,6 @@ public class Login extends HttpServlet {
 			} catch (ServletException | IOException e) {
 				log.getLoggerLogin().error("Se ha producido un error en GET de Login: ", e);
 			}
-//			response.setContentType("text/html; charset=UTF-8");
-//			PaginaLogin paginaLogin = new PaginaLogin(error);
-//			try {
-//				paginaLogin.print(response.getWriter());
-//			} catch (IOException e) {
-//				log.getLoggerLogin().error("Se ha producido un error en GET de Login: ", e);
-//			}
 		}
 	}
 

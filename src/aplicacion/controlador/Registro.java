@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,6 @@ import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.ejb.UsuariosEJB;
 import aplicacion.modelo.pojo.Usuario;
-import aplicacion.vista.PaginaRegistro;
 
 /***
  * Servlet para registrar usuarios.
@@ -55,22 +55,14 @@ public class Registro extends HttpServlet {
 				log.getLoggerRegistro().error("Se ha producido un error en Get Registro: ", e);
 			}
 		} else {
-			String error = request.getParameter("error");
-			if (error != null) {
-				if (error.equals(FALTAN_DATOS)) {
-					error = "No puedes dejar campos en blanco";
-				} else if (error.equals(USUARIO_EXISTE)) {
-					error = "Ya existe un usuario con ese correo electrónico";
-				} else if (error.equals(ERROR_CORREO)) {
-					error = "No te hemos podido mandar el correo de validación, comprueba que has puesto un correo que exista e intentalo de nuevo o vuelve a intentarlo más tarde";
-				}
-			}
-			response.setContentType("text/html; charset=UTF-8");
-			PaginaRegistro paginaRegistro = new PaginaRegistro(error, false);
+			// Obtengo un dispatcher hacia el jsp
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaRegistro.jsp");
+
+			// Hago un forward al jsp con el objeto ya dentro de la petición
 			try {
-				paginaRegistro.print(response.getWriter());
-			} catch (IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en Get Registro: ", e);
+				rs.forward(request, response);
+			} catch (ServletException | IOException e) {
+				log.getLoggerLogin().error("Se ha producido un error en GET de Registro: ", e);
 			}
 		}
 	}
@@ -133,14 +125,18 @@ public class Registro extends HttpServlet {
 		}
 
 		if (correoEnviado) {
-			response.setContentType("text/html; charset=UTF-8");
-			PaginaRegistro paginaRegistro = new PaginaRegistro(null, true);
-			try {
-				paginaRegistro.print(response.getWriter());
-			} catch (IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en Post Registro: ", e);
-			}
+			// Obtengo un dispatcher hacia el jsp
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaRegistro.jsp");
 
+			// Añado el objeto a la petición
+			request.setAttribute("enviado", "true");
+
+			// Hago un forward al jsp con el objeto ya dentro de la petición
+			try {
+				rs.forward(request, response);
+			} catch (ServletException | IOException e) {
+				log.getLoggerPrincipal().error("Se ha producido un error en POST Principal: ", e);
+			}
 		} else {
 			try {
 				if (!response.isCommitted())

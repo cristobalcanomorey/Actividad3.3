@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="aplicacion.vista.Tag"%>
-<%!String error = null; %>
+<%!String error; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,16 @@
 </head>
 <body>
 	<%
-	error = (String) request.getParameter("e");
+	error = (String) request.getParameter("error");
+	String err1 = "El correo o la contraseña no son correctos";
+	String err2 = "Esta cuenta aún no ha sido validada";
+	if (error != null) {
+		if (error.equals("1")) {
+			error = err1;
+		} else if (error.equals("2")) {
+			error = err2;
+		}
+	}
 	%>
 	<ul id="navegacion">
 		<li>

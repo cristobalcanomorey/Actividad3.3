@@ -13,8 +13,8 @@
 </head>
 <body>
 	<%
-		usuario = (Usuario) request.getAttribute("usuario");
-		resul = (String) request.getAttribute("imc");
+	usuario = (Usuario) request.getAttribute("usuario");
+	resul = (String) request.getAttribute("imc");
 	%>
 	<%
 	out.print(new Navegacion(usuario).toString());
