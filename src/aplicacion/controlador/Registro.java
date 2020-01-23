@@ -125,24 +125,17 @@ public class Registro extends HttpServlet {
 		}
 
 		if (correoEnviado) {
-			try {
-				if (!response.isCommitted())
-					response.sendRedirect("Registro?enviado=" + "si");
-			} catch (IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en Post Registro: ", e);
-			}
 //			// Obtengo un dispatcher hacia el jsp
-//			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaRegistro.jsp");
-//
-//			// Añado el objeto a la petición
-//			request.setAttribute("enviado", "true");
-//
-//			// Hago un forward al jsp con el objeto ya dentro de la petición
-//			try {
-//				rs.forward(request, response);
-//			} catch (ServletException | IOException e) {
-//				log.getLoggerPrincipal().error("Se ha producido un error en POST Registro: ", e);
-//			}
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaRegistro.jsp");
+			// Añado el objeto a la petición
+			request.setAttribute("enviado", "true");
+
+			// Hago un forward al jsp con el objeto ya dentro de la petición
+			try {
+				rs.forward(request, response);
+			} catch (ServletException | IOException e) {
+				log.getLoggerPrincipal().error("Se ha producido un error en POST Registro: ", e);
+			}
 		} else {
 			try {
 				if (!response.isCommitted())

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="aplicacion.vista.NavBar"%>
+<%@page import="aplicacion.modelo.pojo.Usuario" %>
+<%@page import="aplicacion.vista.Navegacion"%>
+<%!Usuario usuario = null; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,26 +12,9 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<ul id="navegacion">
-		<li>
-			<a href="Principal">
-				<img src="imgs/logo.png">
-			</a>
-		</li>
-		<li>pep</li>
-		<li>
-			<img src="imgs/users/default.png" alt="fotoDePerfil">
-		</li>
-		<li>
-			<a href="Logout">Logout</a>
-		</li>
-		<li>
-			<a href="Historial">Historial</a>
-		</li>
-		<li>
-			<a href="Baja">Darse de baja</a>
-		</li>
-	</ul>
+	<%
+	usuario = (Usuario) request.getAttribute("usuario");
+	%>
 	<h1>Historial</h1>
 	<table>
 		<thead>

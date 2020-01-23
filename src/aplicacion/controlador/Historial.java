@@ -3,6 +3,8 @@ package aplicacion.controlador;
 import java.io.IOException;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,6 @@ import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.ejb.CalculosEJB;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.pojo.Usuario;
-import aplicacion.vista.PaginaPrincipal;
 
 /***
  * Servlet para mostrar el historial del usuario.
@@ -50,12 +51,24 @@ public class Historial extends HttpServlet {
 				log.getLoggerHistorial().error("Se ha producido un error en GET Historial: ", e);
 			}
 		}
-		response.setContentType("text/html; charset=UTF-8");
-		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, null, true);
+		// Obtengo un dispatcher hacia el jsp
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaHistorial.jsp");
+
+		// Añado el objeto a la petición
+		request.setAttribute("usuario", usuario);
+
+		// Hago un forward al jsp con el objeto ya dentro de la petición
 		try {
-			paginaPrincipal.print(response.getWriter());
-		} catch (IOException e) {
-			log.getLoggerHistorial().error("Se ha producido un error en GET Historial: ", e);
+			rs.forward(request, response);
+		} catch (ServletException | IOException e) {
+			log.getLoggerPrincipal().error("Se ha producido un error en GET Historial: ", e);
 		}
+//		response.setContentType("text/html; charset=UTF-8");
+//		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, null, true);
+//		try {
+//			paginaPrincipal.print(response.getWriter());
+//		} catch (IOException e) {
+//			log.getLoggerHistorial().error("Se ha producido un error en GET Historial: ", e);
+//		}
 	}
 }

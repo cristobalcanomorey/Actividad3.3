@@ -15,8 +15,8 @@
 </head>
 <body>
 	<%
-	error = (String) request.getParameter("error");
-	enviado = (String) request.getParameter("enviado");
+	error = (String) request.getAttribute("error");
+	enviado = (String) request.getAttribute("enviado");
 	if (error != null) {
 		if (error.equals(FALTAN_DATOS)) {
 			error = "No puedes dejar campos en blanco";

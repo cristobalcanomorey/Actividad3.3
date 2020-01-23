@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +16,6 @@ import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.ejb.UsuariosEJB;
 import aplicacion.modelo.pojo.Usuario;
-import aplicacion.vista.PaginaBaja;
 
 /***
  * Servlet para dar de baja a los usuarios
@@ -43,13 +44,22 @@ public class Baja extends HttpServlet {
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		if (usuario != null) {
-			response.setContentType("text/html; charset=UTF-8");
-			PaginaBaja paginaBaja = new PaginaBaja();
+			// Obtengo un dispatcher hacia el jsp
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaBaja.jsp");
+
+			// Hago un forward al jsp con el objeto ya dentro de la petición
 			try {
-				paginaBaja.print(response.getWriter());
-			} catch (IOException e) {
-				log.getLoggerBaja().error("Se ha producido un error en Get Baja: ", e);
+				rs.forward(request, response);
+			} catch (ServletException | IOException e) {
+				log.getLoggerPrincipal().error("Se ha producido un error en GET Baja: ", e);
 			}
+//			response.setContentType("text/html; charset=UTF-8");
+//			PaginaBaja paginaBaja = new PaginaBaja();
+//			try {
+//				paginaBaja.print(response.getWriter());
+//			} catch (IOException e) {
+//				log.getLoggerBaja().error("Se ha producido un error en Get Baja: ", e);
+//			}
 		} else {
 			try {
 				response.sendRedirect("Principal");

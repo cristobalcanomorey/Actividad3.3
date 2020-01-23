@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="aplicacion.vista.NavBar"%>
-<%@ page import="aplicacion.modelo.pojo.Usuario" %>
+<%@page import="aplicacion.modelo.pojo.Usuario" %>
 <%@page import="aplicacion.vista.Navegacion"%>
 <%!Usuario usuario = null; %>
 <%!String resul; %>
