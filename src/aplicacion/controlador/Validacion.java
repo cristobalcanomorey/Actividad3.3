@@ -3,6 +3,8 @@ package aplicacion.controlador;
 import java.io.IOException;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.ejb.UsuariosEJB;
-import aplicacion.vista.PaginaValidacion;
 
 /***
  * Servlet para validar a un usuario
@@ -36,13 +37,22 @@ public class Validacion extends HttpServlet {
 		if (codigo != null) {
 			boolean caducado = usuariosEJB.validar(codigo);
 			if (caducado) {
-				response.setContentType("text/html; charset=UTF-8");
-				PaginaValidacion paginaValidacion = new PaginaValidacion();
+				// Obtengo un dispatcher hacia el jsp
+				RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaValidacion.jsp");
+
+				// Hago un forward al jsp con el objeto ya dentro de la petición
 				try {
-					paginaValidacion.print(response.getWriter());
-				} catch (IOException e) {
-					log.getLoggerValidacion().error("Se ha producido un error en Get Validacion: ", e);
+					rs.forward(request, response);
+				} catch (ServletException | IOException e) {
+					log.getLoggerPrincipal().error("Se ha producido un error en GET Validacion: ", e);
 				}
+//				response.setContentType("text/html; charset=UTF-8");
+//				PaginaValidacion paginaValidacion = new PaginaValidacion();
+//				try {
+//					paginaValidacion.print(response.getWriter());
+//				} catch (IOException e) {
+//					log.getLoggerValidacion().error("Se ha producido un error en Get Validacion: ", e);
+//				}
 			} else {
 				try {
 					response.sendRedirect("Principal");

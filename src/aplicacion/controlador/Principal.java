@@ -59,17 +59,6 @@ public class Principal extends HttpServlet {
 		} catch (ServletException | IOException e) {
 			log.getLoggerPrincipal().error("Se ha producido un error en GET Principal: ", e);
 		}
-
-//		response.setContentType("text/html; charset=UTF-8");
-//		if (usuario != null) {
-//			usuario.setCalculos(null);
-//		}
-//		PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, null, false);
-//		try {
-//			paginaPrincipal.print(response.getWriter());
-//		} catch (IOException e) {
-//			log.getLoggerPrincipal().error("Se ha producido un error en GET Principal: ", e);
-//		}
 	}
 
 	/***
