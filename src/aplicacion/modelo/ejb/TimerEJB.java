@@ -34,7 +34,7 @@ public class TimerEJB {
 	@Schedule(second = "0", minute = "*/5", hour = "*", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "TimerEJB")
 	private void scheduledTimeout(final Timer t) {
 		LogSingleton log = LogSingleton.getInstance();
-		usuariosEJB.limpiar();
+//		usuariosEJB.limpiar();
 		try {
 			ArrayList<AltaBaja> altsBajs = altasBajasEJB.getAltasBajas();
 			MensajeAltasBajas mensajeAltasBajas = new MensajeAltasBajas(altsBajs);

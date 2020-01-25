@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id='selectIdUsuario' resultType='string'>
-		SELECT * FROM validacion WHERE codigo = #{codigo}
+		SELECT idUsuario FROM validacion WHERE codigo = #{codigo}
 	</select>
 	
 	<delete id="borrar">
