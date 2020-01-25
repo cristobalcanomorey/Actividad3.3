@@ -25,7 +25,7 @@ public class TimerEJB {
 	@EJB
 	AltasBajasEJB altasBajasEJB;
 
-	private final String CORREO_JEFE = "tofol.c.m@gmail.com";
+	private final String CORREO_JEFE = "tribot@iessonferrer.net";
 
 	public TimerEJB() {
 	}
