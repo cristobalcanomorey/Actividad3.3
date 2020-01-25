@@ -33,6 +33,7 @@ public class NavBar {
 		this.logo = Tag.incrustarEn(lgo, "a");
 		this.logo.prepararAtributos();
 		this.logo.addAtributo("href", "Principal?modo=" + modo);
+		this.logo.addAtributo("id", "logo");
 	}
 
 	public void addLogout(String modo) {
