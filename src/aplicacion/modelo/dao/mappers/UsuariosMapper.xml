@@ -50,8 +50,4 @@
 		SELECT * FROM usuario WHERE id = #{idUsuario}
 	</select>
 	
-	<delete id='limpiar' parameterType='Usuario'>
-		DELETE FROM usuario WHERE validado = 0
-	</delete>
-	
 </mapper>

@@ -136,20 +136,6 @@ public class UsuarioDAO {
 	}
 
 	/***
-	 * Quita a todos los usuarios que aún no han sido validados.
-	 */
-	public static void limpiar() {
-		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
-		try {
-			UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
-			usuariosMapper.limpiar();
-			sqlSession.commit();
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	/***
 	 * Cambia el modo del usuario
 	 * 
 	 * @param modo    Modo de la vista

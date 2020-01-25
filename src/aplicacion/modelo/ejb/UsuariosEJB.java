@@ -192,13 +192,6 @@ public class UsuariosEJB {
 		UsuarioDAO.delete(usuario);
 	}
 
-	/***
-	 * Borra a todos los usuarios que todavía no han sido validados.
-	 */
-	public void limpiar() {
-		UsuarioDAO.limpiar();
-	}
-
 	public static Usuario cambiarModo(String modo, Usuario usuario) {
 		return UsuarioDAO.cambiarModo(modo, usuario);
 	}

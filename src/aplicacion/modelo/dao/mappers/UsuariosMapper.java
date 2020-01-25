@@ -20,7 +20,5 @@ public interface UsuariosMapper {
 
 	public Usuario selectPorId(@Param("idUsuario") String idUsuario);
 
-	public void limpiar();
-
 	public void cambiarModo(@Param("modo") int modo, @Param("id") String id);
 }
