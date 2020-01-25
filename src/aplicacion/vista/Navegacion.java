@@ -13,11 +13,11 @@ public class Navegacion {
 
 	public Navegacion(Usuario usuario, String modo) {
 		if (usuario == null) {
-			navBar = new NavBar(null, null);
+			navBar = new NavBar(null, null, modo);
 			navBar.addRegistro(modo);
 			navBar.addLogin(modo);
 		} else {
-			navBar = new NavBar(usuario.getNombre(), UsuariosEJB.getRutaFotoCompleta(usuario));
+			navBar = new NavBar(usuario.getNombre(), UsuariosEJB.getRutaFotoCompleta(usuario), modo);
 			navBar.addLogout(modo);
 			navBar.addHistorial(modo);
 			navBar.addDarseDeBaja(modo);

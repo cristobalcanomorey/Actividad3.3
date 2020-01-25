@@ -9,7 +9,6 @@ public class NavBar {
 	private Tag login = null;
 	private Tag registro = null;
 	private Tag historial = null;
-	private Tag modo = null;
 
 	/***
 	 * Establece la cabecera de la página, que es el logo, la barra de navegación y
@@ -18,7 +17,7 @@ public class NavBar {
 	 * @param nombreUsuario
 	 * @param rutaFotoPerfil
 	 */
-	public NavBar(String nombreUsuario, String rutaFotoPerfil) {
+	public NavBar(String nombreUsuario, String rutaFotoPerfil, String modo) {
 		if (nombreUsuario != null) {
 			this.usuario = new Tag(nombreUsuario);
 		}
@@ -33,7 +32,7 @@ public class NavBar {
 		lgo.addAtributo("src", "imgs/logo.png");
 		this.logo = Tag.incrustarEn(lgo, "a");
 		this.logo.prepararAtributos();
-		this.logo.addAtributo("href", "Principal");
+		this.logo.addAtributo("href", "Principal?modo=" + modo);
 	}
 
 	public void addLogout(String modo) {

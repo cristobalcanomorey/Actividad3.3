@@ -16,13 +16,17 @@ public class ModoEJB {
 			} else {
 				modoDelUsuario = "diurno";
 			}
-			if (modo != null & !modo.equals(modoDelUsuario)) {
-				usuario = UsuariosEJB.cambiarModo(modo, usuario);
-				if (usuario.getModoNocturno()) {
-					modo = "nocturno";
-				} else {
-					modo = "diurno";
+			if (modo != null) {
+				if (!modo.equals(modoDelUsuario)) {
+					usuario = UsuariosEJB.cambiarModo(modo, usuario);
+					if (usuario.getModoNocturno()) {
+						modo = "nocturno";
+					} else {
+						modo = "diurno";
+					}
 				}
+			} else {
+				modo = "diurno";
 			}
 		}
 		return modo;
