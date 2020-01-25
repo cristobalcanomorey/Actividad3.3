@@ -46,6 +46,6 @@
 			</a>
 		</li>
 	</ul>
-	<a href="Principal?modo=diurno">Modo diurno</a>
+	<a href="Login?modo=diurno">Modo diurno</a>
 </body>
 </html>

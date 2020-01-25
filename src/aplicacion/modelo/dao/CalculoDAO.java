@@ -27,7 +27,14 @@ public class CalculoDAO {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CalculosMapper calculosMapper = sqlSession.getMapper(CalculosMapper.class);
-			return calculosMapper.getHistorial(usuario);
+			ArrayList<Calculo> calculo = calculosMapper.getHistorial(usuario);
+			if (calculo != null) {
+				if (calculo.size() > 0) {
+					return calculo;
+				}
+			}
+			return null;
+
 		} finally {
 			sqlSession.close();
 		}
