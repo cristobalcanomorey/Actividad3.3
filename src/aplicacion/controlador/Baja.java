@@ -56,7 +56,7 @@ public class Baja extends HttpServlet {
 			try {
 				rs.forward(request, response);
 			} catch (ServletException | IOException e) {
-				log.getLoggerPrincipal().error("Se ha producido un error en GET Baja: ", e);
+				log.getLoggerBaja().error("Se ha producido un error en GET Baja: ", e);
 			}
 		} else {
 			try {

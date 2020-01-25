@@ -50,7 +50,7 @@ public class Validacion extends HttpServlet {
 				try {
 					rs.forward(request, response);
 				} catch (ServletException | IOException e) {
-					log.getLoggerPrincipal().error("Se ha producido un error en GET Validacion: ", e);
+					log.getLoggerValidacion().error("Se ha producido un error en GET Validacion: ", e);
 				}
 			} else {
 				try {

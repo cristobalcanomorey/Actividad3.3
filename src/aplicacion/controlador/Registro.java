@@ -144,7 +144,7 @@ public class Registro extends HttpServlet {
 			try {
 				rs.forward(request, response);
 			} catch (ServletException | IOException e) {
-				log.getLoggerPrincipal().error("Se ha producido un error en POST Registro: ", e);
+				log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 			}
 		} else {
 			try {
