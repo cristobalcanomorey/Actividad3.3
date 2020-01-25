@@ -12,7 +12,7 @@
 	<h2>Te hemos enviado un correo para validar tu cuenta</h2>
 	<ul id="navegacion">
 		<li>
-			<a href="Principal?modo=nocturno">
+			<a id="logo" href="Principal?modo=nocturno">
 				<img src="imgs/logo.png">
 			</a>
 		</li>

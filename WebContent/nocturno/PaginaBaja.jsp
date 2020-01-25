@@ -16,7 +16,7 @@
 	<p>¿Seguro que quieres darte de baja? Se borrarán todos tus datos.</p>
 	<ul id="navegacion">
 		<li>
-			<a href="Principal?modo=nocturno">
+			<a id="logo" href="Principal?modo=nocturno">
 				<img src="imgs/logo.png">
 			</a>
 		</li>

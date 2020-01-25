@@ -24,7 +24,7 @@
 	%>
 	<ul id="navegacion">
 		<li>
-			<a href="Principal?modo=diurno">
+			<a id="logo" href="Principal?modo=diurno">
 				<img src="imgs/logo.png">
 			</a>
 		</li>
