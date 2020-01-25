@@ -22,9 +22,9 @@
 	<a href="Principal?modo=nocturno">Modo nocturno</a>
 	<h1>Calcular IMC</h1>
 	<form method="POST" action="Principal">
-		<p>Peso</p>
+		<p>Peso (kg)</p>
 		<input name="peso" step="0.01" type="number">
-		<p>Altura</p>
+		<p>Altura (m)</p>
 		<input name="altura" step="0.01" type="number">
 		<input type="hidden" name="modo" value="diurno">
 		<input type="submit" value="Calcular">
