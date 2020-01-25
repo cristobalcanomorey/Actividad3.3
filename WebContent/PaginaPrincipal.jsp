@@ -2,6 +2,7 @@
 <%@page import="aplicacion.vista.NavBar"%>
 <%@page import="aplicacion.modelo.pojo.Usuario" %>
 <%@page import="aplicacion.vista.Navegacion"%>
+<%@page import="aplicacion.vista.Tag"%>
 <%!Usuario usuario = null; %>
 <%!String resul; %>
 <!DOCTYPE html>
@@ -32,7 +33,25 @@
 	<div>
 	<%
 	if(resul != null){
-		out.print(resul);
+		out.print(new Tag("p","Tu índice de mása corporal es de "+resul,true,true).toString());
+		float imc = Float.parseFloat(resul.replace(",","."));
+		if(imc<18.5){
+			out.print(new Tag("p","Al ser infeiror a 18,5 se considera peso insuficiente para tu estatura",true,true).toString());
+		} else if(imc>= 18.5 && imc<=24.9){
+			out.print(new Tag("p","Al estar entre 18,5 y 24,9 se considera un peso adecuado para tu estatura",true,true).toString());
+		} else if(imc>=25 && imc<=26.9){
+			out.print(new Tag("p","Al estar entre 25 y 26,9 se considera Sobrepeso de grado I",true,true).toString());
+		} else if(imc>=27 && imc<=29.9){
+			out.print(new Tag("p","Al estar entre 27 y 29,9 se considera Sobrepeso de grado II",true,true).toString());
+		} else if(imc>=30 && imc<=34.9){
+			out.print(new Tag("p","Al estar entre 30 y 34,9 se considera Obesidad de tipo I",true,true).toString());
+		} else if(imc>=35 && imc<=39.9){
+			out.print(new Tag("p","Al estar entre 35 y 39,9 se considera Obesidad de tipo II",true,true).toString());
+		} else if(imc>=40 && imc<=49.9){
+			out.print(new Tag("p","Al estar entre 40 y 49,9 se considera Obesidad de tipo III",true,true).toString());
+		} else{
+			out.print(new Tag("p","Al ser igual o superior a 50 se considera Obesidad de tipo IV",true,true).toString());
+		}
 	}
 	%>
 	</div>
