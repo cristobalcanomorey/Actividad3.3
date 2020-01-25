@@ -69,7 +69,10 @@ public class UsuariosEJB {
 		// Obtenemos el archivo y lo guardamos a disco
 		for (Part part : partes) {
 			fileName = UsuariosEJB.getFileNameDeUsuario(part, usuario);
-			part.write(carpeta + File.separator + fileName);
+			if (!fileName.equals("default.png")) {
+				part.write(carpeta + File.separator + fileName);
+				break;
+			}
 		}
 
 		// Si es una imagen guardamos la ruta en fPerfil

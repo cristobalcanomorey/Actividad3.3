@@ -1,6 +1,5 @@
 package aplicacion.controlador;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
@@ -101,7 +100,7 @@ public class Registro extends HttpServlet {
 				log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 			}
 		}
-		String uploadPath = getServletContext().getRealPath("") + File.separator + UsuariosEJB.getUploadDirectory();
+		String uploadPath = getServletContext().getRealPath(UsuariosEJB.getUploadDirectory());
 		String nombre = request.getParameter("nombre");
 		String correo = request.getParameter("correo");
 		String paswd = request.getParameter("paswd");

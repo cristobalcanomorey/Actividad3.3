@@ -71,7 +71,7 @@ begin
 end$$
 DELIMITER ;
 
-#Trigger para insertat bajas de usuarios en altas_bajas
+#Trigger para insertar bajas de usuarios en altas_bajas
 DELIMITER $$
 CREATE TRIGGER bajas BEFORE DELETE ON usuario
 FOR EACH ROW
@@ -88,7 +88,7 @@ INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNoct
 values ('pep@gmail.com','pep','passwordpep','default.png',true,'2019-12-07',false);
 
 INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
-values ('pip@gmail.com','pip','passwordpip','default.png',true,'2019-12-08',false);
+values ('pip@gmail.com','pip','passwordpip','default.png',true,'2019-12-08',true);
 
 INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
 values ('pop@gmail.com','pop','passwordpop','default.png',false,'2019-12-09',false);
