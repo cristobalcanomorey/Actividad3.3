@@ -35,7 +35,7 @@ public class ModoEJB {
 	public String obtenerRuta(String modo, String pagina) {
 		if (modo != null && modo.equals("nocturno")) {
 			return "/nocturno/" + pagina + ".jsp";
-		} else if (modo == null || modo.equals("diurno")) {
+		} else if (modo == null || modo.equals("diurno") || modo.equals("null")) {
 			return "/" + pagina + ".jsp";
 		}
 		return "";
