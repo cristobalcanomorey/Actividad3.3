@@ -91,7 +91,7 @@ public class Login extends HttpServlet {
 				sesionesEJB.loginUsuario(session, usuario);
 
 				try {
-					response.sendRedirect("Principal?modo=" + modo);
+					response.sendRedirect("Principal?modo=" + modoEJB.obtenerModo(usuario));
 				} catch (IOException e) {
 					log.getLoggerLogin().error("Se ha producido un error en POST Login: ", e);
 				}

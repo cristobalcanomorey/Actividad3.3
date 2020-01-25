@@ -11,25 +11,25 @@ public class ModoEJB {
 	public String actualizarModo(Usuario usuario, String modo) {
 		String modoDelUsuario = "";
 		if (usuario != null) {
-			if (usuario.getModoNocturno()) {
-				modoDelUsuario = "nocturno";
-			} else {
-				modoDelUsuario = "diurno";
-			}
+			modoDelUsuario = obtenerModo(usuario);
 			if (modo != null) {
 				if (!modo.equals(modoDelUsuario)) {
 					usuario = UsuariosEJB.cambiarModo(modo, usuario);
-					if (usuario.getModoNocturno()) {
-						modo = "nocturno";
-					} else {
-						modo = "diurno";
-					}
+					modo = obtenerModo(usuario);
 				}
 			} else {
 				modo = "diurno";
 			}
 		}
 		return modo;
+	}
+
+	public String obtenerModo(Usuario usuario) {
+		if (usuario.getModoNocturno()) {
+			return "nocturno";
+		} else {
+			return "diurno";
+		}
 	}
 
 	public String obtenerRuta(String modo, String pagina) {
