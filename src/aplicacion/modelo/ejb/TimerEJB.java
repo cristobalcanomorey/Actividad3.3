@@ -25,13 +25,13 @@ public class TimerEJB {
 	@EJB
 	AltasBajasEJB altasBajasEJB;
 
-	private final String CORREO_JEFE = "tribot@gmail.com";
+	private final String CORREO_JEFE = "tofol.c.m@gmail.com";
 
 	public TimerEJB() {
 	}
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "*", minute = "*/5", hour = "*", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "TimerEJB")
+	@Schedule(second = "0", minute = "*/5", hour = "*", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "TimerEJB")
 	private void scheduledTimeout(final Timer t) {
 		LogSingleton log = LogSingleton.getInstance();
 		usuariosEJB.limpiar();
@@ -51,7 +51,7 @@ public class TimerEJB {
 		if (mensajeAltasBajas.getTabla() != null) {
 			tabla = mensajeAltasBajas.getTabla().toString();
 		}
-		return mailEJB.sendMail(CORREO_JEFE, mensajeAltasBajas.getMensaje().toString(), tabla, correo);
+		return mailEJB.sendMail(CORREO_JEFE, mensajeAltasBajas.getMensaje(), tabla, correo);
 	}
 
 }

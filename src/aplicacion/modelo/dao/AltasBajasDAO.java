@@ -1,17 +1,15 @@
 package aplicacion.modelo.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
 
-import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.dao.mappers.AltasBajasMapper;
 import aplicacion.modelo.ejb.CalculosEJB;
+import aplicacion.modelo.pojo.AltaBaja;
 import aplicacion.modelo.pojo.Usuario;
 
 /***
@@ -21,8 +19,6 @@ import aplicacion.modelo.pojo.Usuario;
  *
  */
 public class AltasBajasDAO {
-
-	private static final Logger LOG = LogSingleton.getInstance().getLoggerAltasBajasDAO();
 
 	/***
 	 * Registra la validación de un usuario.
@@ -50,22 +46,20 @@ public class AltasBajasDAO {
 	 * 
 	 * @return Altas, bajas y validaciones de los usuarios.
 	 */
-	public static ResultSet getAltasBajas() {
+	public static ArrayList<AltaBaja> getAltasBajas() {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			AltasBajasMapper altasBajasMapper = sqlSession.getMapper(AltasBajasMapper.class);
-			ResultSet ab = altasBajasMapper.getAltasBajas();
+			ArrayList<AltaBaja> ab = altasBajasMapper.getAltasBajas();
 
-			if (ab.getRow() > 0) {
-				ab.beforeFirst();
+			if (ab.size() > 0) {
 				return ab;
+			} else {
+				return null;
 			}
-		} catch (SQLException e) {
-			LOG.error("ERROR ALTAS_BAJAS DAO: ", e);
 		} finally {
 			sqlSession.close();
 		}
-		return null;
 	}
 
 	/***

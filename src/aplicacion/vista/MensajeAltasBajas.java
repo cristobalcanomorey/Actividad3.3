@@ -7,7 +7,7 @@ import aplicacion.modelo.pojo.AltaBaja;
 
 public class MensajeAltasBajas {
 
-	private Tag mensaje = null;
+	private String mensaje = null;
 	private Tabla tabla = null;
 
 	/***
@@ -18,9 +18,9 @@ public class MensajeAltasBajas {
 	public MensajeAltasBajas(ArrayList<AltaBaja> altasBajas) {
 		crearTablaMensaje(altasBajas);
 		if (tabla != null) {
-			mensaje = new Tag("h2", "Estos son los movimientos de la BBDD en los últimos 5 minutos:", true, true);
+			mensaje = "Estos son los movimientos de la BBDD en los últimos 5 minutos:";
 		} else {
-			mensaje = new Tag("h2", "Todo está tranquilo por aquí... Demasiado tranquilo.", true, true);
+			mensaje = "Todo está tranquilo por aquí. Demasiado tranquilo...";
 		}
 	}
 
@@ -56,7 +56,7 @@ public class MensajeAltasBajas {
 		return tabla;
 	}
 
-	public Tag getMensaje() {
+	public String getMensaje() {
 		return mensaje;
 	}
 

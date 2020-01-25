@@ -45,24 +45,25 @@ public class Principal extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
 
-		String nocturno = request.getParameter("nocturno");
-
-		if (nocturno == "si") {
-			session.setAttribute("nocturno", "si");
-		} else {
-
-		}
+//		String nocturno = request.getParameter("nocturno");
+//
+//		if (nocturno == "si") {
+//			session.setAttribute("nocturno", "si");
+//		} else {
+//
+//		}
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
 		// Obtengo un dispatcher hacia el jsp
-		String modo = (String) session.getAttribute("nocturno");
-		RequestDispatcher rs = null;
-		if (modo == null) {
-			rs = getServletContext().getRequestDispatcher("/PaginaPrincipal.jsp");
-		} else {
-			rs = getServletContext().getRequestDispatcher("/nocturno/PaginaPrincipal.jsp");
-		}
+//		String modo = (String) session.getAttribute("nocturno");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaPrincipal.jsp");
+
+//		if (modo == null) {
+//			rs = getServletContext().getRequestDispatcher("/aplicacion/vista/PaginaPrincipal.jsp");
+//		} else {
+//			rs = getServletContext().getRequestDispatcher("/nocturno/PaginaPrincipal.jsp");
+//		}
 
 		// Añado el objeto a la petición
 		request.setAttribute("usuario", usuario);

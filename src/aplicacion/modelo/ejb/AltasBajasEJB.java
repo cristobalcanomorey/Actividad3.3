@@ -1,6 +1,5 @@
 package aplicacion.modelo.ejb;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -33,26 +32,7 @@ public class AltasBajasEJB {
 	 * @throws SQLException Error de la BBDD
 	 */
 	public ArrayList<AltaBaja> getAltasBajas() throws SQLException {
-		ArrayList<AltaBaja> altasBajas = rsAArrayList(AltasBajasDAO.getAltasBajas());
-		return altasBajas;
-	}
-
-	/***
-	 * Convierte de ResultSet a ArrayList con altas y bajas
-	 * 
-	 * @param rs ResultSet a convertir
-	 * @return ArrayList con altas y bajas
-	 * @throws SQLException Error de la BBDD
-	 */
-	private ArrayList<AltaBaja> rsAArrayList(ResultSet rs) throws SQLException {
-		ArrayList<AltaBaja> altasBajas = new ArrayList<AltaBaja>();
-		while (rs.next()) {
-			AltaBaja ab = new AltaBaja(rs.getInt("id"), rs.getString("correo"), rs.getString("nombre"),
-					rs.getString("tipoAccion"), rs.getDate("fecha"));
-			altasBajas.add(ab);
-		}
-		rs.close();
-		return altasBajas;
+		return AltasBajasDAO.getAltasBajas();
 	}
 
 	/***
