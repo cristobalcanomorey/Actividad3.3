@@ -195,4 +195,8 @@ public class UsuariosEJB {
 	public void limpiar() {
 		UsuarioDAO.limpiar();
 	}
+
+	public static Usuario cambiarModo(String modo, Usuario usuario) {
+		return UsuarioDAO.cambiarModo(modo, usuario);
+	}
 }

@@ -9,6 +9,7 @@ public class NavBar {
 	private Tag login = null;
 	private Tag registro = null;
 	private Tag historial = null;
+	private Tag modo = null;
 
 	/***
 	 * Establece la cabecera de la página, que es el logo, la barra de navegación y
@@ -35,34 +36,34 @@ public class NavBar {
 		this.logo.addAtributo("href", "Principal");
 	}
 
-	public void addLogout() {
+	public void addLogout(String modo) {
 		this.logout = new Tag("a", "Logout", true, true);
 		this.logout.prepararAtributos();
-		this.logout.addAtributo("href", "Logout");
+		this.logout.addAtributo("href", "Logout?modo=" + modo);
 	}
 
-	public void addLogin() {
+	public void addLogin(String modo) {
 		this.login = new Tag("a", "Login", true, true);
 		this.login.prepararAtributos();
-		this.login.addAtributo("href", "Login");
+		this.login.addAtributo("href", "Login?modo=" + modo);
 	}
 
-	public void addRegistro() {
+	public void addRegistro(String modo) {
 		this.registro = new Tag("a", "Registro", true, true);
 		this.registro.prepararAtributos();
-		this.registro.addAtributo("href", "Registro");
+		this.registro.addAtributo("href", "Registro?modo=" + modo);
 	}
 
-	public void addDarseDeBaja() {
+	public void addDarseDeBaja(String modo) {
 		this.darseDeBaja = new Tag("a", "Darse de baja", true, true);
 		this.darseDeBaja.prepararAtributos();
-		this.darseDeBaja.addAtributo("href", "Baja");
+		this.darseDeBaja.addAtributo("href", "Baja?modo=" + modo);
 	}
 
-	public void addHistorial() {
+	public void addHistorial(String modo) {
 		this.historial = new Tag("a", "Historial", true, true);
 		this.historial.prepararAtributos();
-		this.historial.addAtributo("href", "Historial");
+		this.historial.addAtributo("href", "Historial?modo=" + modo);
 	}
 
 	/***

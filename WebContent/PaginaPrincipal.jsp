@@ -17,14 +17,16 @@
 	resul = (String) request.getAttribute("imc");
 	%>
 	<%
-	out.print(new Navegacion(usuario).toString());
+	out.print(new Navegacion(usuario,"diurno").toString());
 	%>
+	<a href="Principal?modo=nocturno">Modo nocturno</a>
 	<h1>Calcular IMC</h1>
 	<form method="POST" action="Principal">
 		<p>Peso</p>
 		<input name="peso" step="0.01" type="number">
 		<p>Altura</p>
 		<input name="altura" step="0.01" type="number">
+		<input type="hidden" name="modo" value="diurno">
 		<input type="submit" value="Calcular">
 	</form>
 	<div>

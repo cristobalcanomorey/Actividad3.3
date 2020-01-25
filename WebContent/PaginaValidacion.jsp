@@ -10,12 +10,13 @@
 <body>
 	<ul id="navegacion">
 		<li>
-			<a href="Principal">
+			<a href="Principal?modo=diurno">
 				<img src="imgs/logo.png">
 			</a>
 		</li>
 	</ul>
-	<a href="Principal">Volver a la página principal</a>
+	<a href="Validacion?modo=nocturno">Modo nocturno</a>
+	<a href="Principal?modo=diurno">Volver a la página principal</a>
 	<h2>Te hemos enviado un correo para validar tu cuenta</h2>
 </body>
 </html>

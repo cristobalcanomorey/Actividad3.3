@@ -5,7 +5,19 @@ use ActividadIMC;
 DROP USER IF EXISTS 'tofol'@'localhost';
 DROP USER IF EXISTS 'tofol'@'%';
 
-CREATE USER IF NOT EXISTS 'tofol'@'%' IDENTIFIED BY 'password';
+drop procedure if exists crear_usuario;
+
+#Procedure que intenta bajar el nivel de seguridad por si acaso y crea el usuario
+DELIMITER $$
+CREATE PROCEDURE crear_usuario()
+BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+		SET GLOBAL validate_password_policy = 0;
+	CREATE USER IF NOT EXISTS 'tofol'@'%' IDENTIFIED BY 'password';
+END$$
+DELIMITER ;
+SET GLOBAL validate_password_policy = 0;
+CALL crear_usuario();
 
 GRANT ALL PRIVILEGES ON ActividadIMC.* TO 'tofol'@'%' WITH GRANT OPTION;
 
@@ -16,7 +28,8 @@ CREATE TABLE IF NOT EXISTS usuario (
 	password VARCHAR(100) NOT NULL,
 	foto VARCHAR(255),
     validado BOOLEAN NOT NULL,
-    fechaRegistro DATE NOT NULL
+    fechaRegistro DATE NOT NULL,
+    modoNocturno BOOLEAN NOT NULL
 )  ENGINE=INNODB charset=utf8;
 
 CREATE TABLE IF NOT EXISTS altas_bajas(
@@ -68,20 +81,20 @@ begin
 end$$
 DELIMITER ;
 
-INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-values ('tofol@gmail.com','tofol','passwordtofol','default.png',false,'2019-12-06');
+INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
+values ('tofol@gmail.com','tofol','passwordtofol','default.png',false,'2019-12-06',true);
 
-INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-values ('pep@gmail.com','pep','passwordpep','default.png',true,'2019-12-07');
+INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
+values ('pep@gmail.com','pep','passwordpep','default.png',true,'2019-12-07',false);
 
-INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-values ('pip@gmail.com','pip','passwordpip','default.png',true,'2019-12-08');
+INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
+values ('pip@gmail.com','pip','passwordpip','default.png',true,'2019-12-08',false);
 
-INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-values ('pop@gmail.com','pop','passwordpop','default.png',false,'2019-12-09');
+INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
+values ('pop@gmail.com','pop','passwordpop','default.png',false,'2019-12-09',false);
 
-INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-values ('pup@gmail.com','pup','passwordpup','default.png',true,'2019-12-10');
+INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
+values ('pup@gmail.com','pup','passwordpup','default.png',true,'2019-12-10',false);
 
 INSERT INTO validacion (codigo,idUsuario)
 values ('algkkjadkfajfajsdnrri',1);

@@ -9,15 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>IMC</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/styleNocturno.css">
 </head>
 <body>
 	<%
 	usuario = (Usuario) request.getAttribute("usuario");
 	resul = (String) request.getAttribute("imc");
-	%>
-	<%
-	out.print(new Navegacion(usuario).toString());
 	%>
 	<h1>Calcular IMC</h1>
 	<form method="POST" action="Principal">
@@ -25,6 +22,7 @@
 		<input name="peso" step="0.01" type="number">
 		<p>Altura</p>
 		<input name="altura" step="0.01" type="number">
+		<input type="hidden" name="modo" value="nocturno">
 		<input type="submit" value="Calcular">
 	</form>
 	<div>
@@ -34,5 +32,9 @@
 	}
 	%>
 	</div>
+	<%
+	out.print(new Navegacion(usuario,"nocturno").toString());
+	%>
+	<a href="Principal?modo=diurno">Modo diurno</a>
 </body>
 </html>

@@ -3,6 +3,9 @@
 <%@page import="aplicacion.vista.NavBar"%>
 <%@page import="aplicacion.modelo.pojo.Usuario" %>
 <%@page import="aplicacion.vista.Navegacion"%>
+<%@page import="aplicacion.vista.Tag"%>
+<%@page import="aplicacion.vista.Tabla"%>
+<%@page import="aplicacion.vista.ObtenerTabla"%>
 <%!Usuario usuario = null; %>
 <!DOCTYPE html>
 <html>
@@ -15,24 +18,20 @@
 	<%
 	usuario = (Usuario) request.getAttribute("usuario");
 	%>
+	<%
+	out.print(new Navegacion(usuario,"diurno").toString());
+	%>
+	<a href="Historial?modo=nocturno">Modo nocturno</a>
 	<h1>Historial</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Estatura</th>
-				<th>Peso</th>
-				<th>Fecha</th>
-				<th>IMC</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>1.9</td>
-				<td>101.0</td>
-				<td>2018-12-06 01:00:00</td>
-				<td>27,98</td>
-			</tr>
-		</tbody>
-	</table>
+	<%
+	if(usuario != null){
+		Tabla tabla = ObtenerTabla.crearTablaHistorial(usuario);
+		if(tabla == null){
+			out.print(new Tag("p", "No has realizado ningún calculo todavía", true, true));
+		} else{
+			out.print(tabla.toString());
+		}
+	}
+	%>
 </body>
 </html>

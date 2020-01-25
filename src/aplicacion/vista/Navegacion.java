@@ -11,16 +11,16 @@ public class Navegacion {
 	@EJB
 	private UsuariosEJB usuariosEJB;
 
-	public Navegacion(Usuario usuario) {
+	public Navegacion(Usuario usuario, String modo) {
 		if (usuario == null) {
 			navBar = new NavBar(null, null);
-			navBar.addRegistro();
-			navBar.addLogin();
+			navBar.addRegistro(modo);
+			navBar.addLogin(modo);
 		} else {
 			navBar = new NavBar(usuario.getNombre(), UsuariosEJB.getRutaFotoCompleta(usuario));
-			navBar.addLogout();
-			navBar.addHistorial();
-			navBar.addDarseDeBaja();
+			navBar.addLogout(modo);
+			navBar.addHistorial(modo);
+			navBar.addDarseDeBaja(modo);
 		}
 	}
 

@@ -29,11 +29,12 @@
 	%>
 	<ul id="navegacion">
 		<li>
-			<a href="Principal">
+			<a href="Principal?modo=diurno">
 				<img src="imgs/logo.png">
 			</a>
 		</li>
 	</ul>
+	<a href="Registro?modo=nocturno">Modo nocturno</a>
 	<h1>Registrate</h1>
 	<form enctype="multipart/form-data" method="POST" action="Registro">
 		<p>Nombre de usuario</p>
@@ -44,6 +45,7 @@
 		<input name="paswd" type="password" required="">
 		<p>Foto de perfil</p>
 		<input name="avatar" type="file" accept="image/png,image/jpeg,image/jpg">
+		<input type="hidden" name="modo" value="diurno">
 		<input type="submit" value="Registrarse">
 	</form>
 	<%

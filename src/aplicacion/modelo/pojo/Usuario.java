@@ -12,29 +12,21 @@ public class Usuario {
 	private String foto;
 	private boolean validado;
 	private Date fechaRegistro;
+	private boolean modoNocturno;
 	private ArrayList<Calculo> calculos = null;
 
 	public Usuario() {
 	}
 
-	public Usuario(Integer id, String correo, String nombre, String password, String foto, boolean validado,
-			Date fechaRegistro) {
-		this.id = id;
+	public Usuario(String correo, String nombre, String password, String foto, boolean validado, Date fechaRegistro,
+			boolean modoNocturno) {
 		this.correo = correo;
 		this.nombre = nombre;
 		this.password = password;
 		this.foto = foto;
 		this.validado = validado;
 		this.fechaRegistro = fechaRegistro;
-	}
-
-	public Usuario(String correo, String nombre, String password, String foto, boolean validado, Date fechaRegistro) {
-		this.correo = correo;
-		this.nombre = nombre;
-		this.password = password;
-		this.foto = foto;
-		this.validado = validado;
-		this.fechaRegistro = fechaRegistro;
+		this.modoNocturno = modoNocturno;
 	}
 
 	public void setCalculos(ArrayList<Calculo> calculos) {
@@ -71,6 +63,14 @@ public class Usuario {
 
 	public String getCorreo() {
 		return correo;
+	}
+
+	public boolean getModoNocturno() {
+		return modoNocturno;
+	}
+
+	public void setModoNocturno(boolean modo) {
+		this.modoNocturno = modo;
 	}
 
 }

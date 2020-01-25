@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/styleNocturno.css">
 </head>
 <body>
 	<%
@@ -22,19 +22,13 @@
 		}
 	}
 	%>
-	<ul id="navegacion">
-		<li>
-			<a href="Principal">
-				<img src="imgs/logo.png">
-			</a>
-		</li>
-	</ul>
 	<h1>Iniciar sesión</h1>
 	<form method="POST" action="Login">
 		<p>Correo</p>
 		<input name="correo" type="email">
 		<p>Contraseña</p>
 		<input name="paswd" type="password">
+		<input type="hidden" name="modo" value="nocturno">
 		<input type="submit" value="Iniciar sesión">
 	</form>
 	<%
@@ -45,5 +39,13 @@
 		out.print(pista.toString());
 	}
 	%>
+	<ul id="navegacion">
+		<li>
+			<a href="Principal?modo=nocturno">
+				<img src="imgs/logo.png">
+			</a>
+		</li>
+	</ul>
+	<a href="Principal?modo=diurno">Modo diurno</a>
 </body>
 </html>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import aplicacion.modelo.LogSingleton;
+import aplicacion.modelo.ejb.ModoEJB;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.ejb.UsuariosEJB;
 import aplicacion.modelo.pojo.Usuario;
@@ -26,12 +27,14 @@ import aplicacion.modelo.pojo.Usuario;
 @WebServlet("/Baja")
 public class Baja extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static final String PAGINA = "PaginaBaja";
 	@EJB
 	UsuariosEJB usuariosEJB;
 
 	@EJB
 	SesionesEJB sesionesEJB;
+	@EJB
+	ModoEJB modoEJB;
 
 	/***
 	 * Si el usuario está logeado le responde con la página de advertencia, si no lo
@@ -41,11 +44,13 @@ public class Baja extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
-
+		String modo = request.getParameter("modo");
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		if (usuario != null) {
+			modo = modoEJB.actualizarModo(usuario, modo);
+
 			// Obtengo un dispatcher hacia el jsp
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaBaja.jsp");
+			RequestDispatcher rs = getServletContext().getRequestDispatcher(modoEJB.obtenerRuta(modo, PAGINA));
 
 			// Hago un forward al jsp con el objeto ya dentro de la petición
 			try {
@@ -55,7 +60,7 @@ public class Baja extends HttpServlet {
 			}
 		} else {
 			try {
-				response.sendRedirect("Principal");
+				response.sendRedirect("Principal?modo=" + modo);
 			} catch (IOException e) {
 				log.getLoggerBaja().error("Se ha producido un error en GET Baja: ", e);
 			}
@@ -70,7 +75,7 @@ public class Baja extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
-
+		String modo = request.getParameter("modo");
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		if (usuario != null) {
 			// Si tenía fóto de perfil se borra.
@@ -84,7 +89,7 @@ public class Baja extends HttpServlet {
 			usuariosEJB.bajar(usuario);
 		}
 		try {
-			response.sendRedirect("Principal");
+			response.sendRedirect("Principal?modo=" + modo);
 		} catch (IOException e) {
 			log.getLoggerBaja().error("Se ha producido un error en POST Baja: ", e);
 		}

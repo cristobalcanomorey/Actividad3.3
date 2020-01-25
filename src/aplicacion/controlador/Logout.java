@@ -27,13 +27,13 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		LogSingleton log = LogSingleton.getInstance();
 		HttpSession session = request.getSession(false);
-
+		String modo = request.getParameter("modo");
 		if (session != null) {
 			session.invalidate();
 		}
 
 		try {
-			response.sendRedirect("Principal");
+			response.sendRedirect("Principal?modo=" + modo);
 		} catch (IOException e) {
 			log.getLoggerLogout().error("Se ha producido un error en GET Logout: ", e);
 		}

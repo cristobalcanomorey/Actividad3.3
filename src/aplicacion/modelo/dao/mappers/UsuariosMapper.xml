@@ -12,6 +12,7 @@
 		<result property='foto' column='foto' />
 		<result property='validado' column='validado' />
 		<result property='fechaRegistro' column='fechaRegistro' />
+		<result property='modoNocturno' column='modoNocturno' />
 	</resultMap>
 
 	<select id='loginUsuario' resultType='Usuario'>
@@ -23,8 +24,8 @@
 	</select>
 	
 	<insert id='insertUsuario' parameterType='map' useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro)
-		VALUES(#{correo},#{nombre},#{password},#{foto},#{esValidado},#{fecha})
+		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno)
+		VALUES(#{correo},#{nombre},#{password},#{foto},#{esValidado},#{fecha},#{modoNocturno})
 	</insert>
 	
 	<update id='validarPorId'>
@@ -32,6 +33,13 @@
 		SET
 		validado=1
 		WHERE id = #{idUsuario}
+	</update>
+	
+	<update id="cambiarModo">
+		UPDATE usuario
+		SET
+		modoNocturno = #{modo}
+		WHERE id = #{id} 
 	</update>
 	
 	<delete id='delete' parameterType='Usuario'>

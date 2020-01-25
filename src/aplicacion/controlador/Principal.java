@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.ejb.CalculosEJB;
+import aplicacion.modelo.ejb.ModoEJB;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.pojo.Calculo;
 import aplicacion.modelo.pojo.Usuario;
@@ -27,12 +28,15 @@ import aplicacion.modelo.pojo.Usuario;
 @WebServlet("/Principal")
 public class Principal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static final String PAGINA = "PaginaPrincipal";
 	@EJB
 	SesionesEJB sesionesEJB;
 
 	@EJB
 	CalculosEJB calculosEJB;
+
+	@EJB
+	ModoEJB modoEJB;
 
 	/***
 	 * Muestra la página principal con o sin el usuario.
@@ -44,26 +48,13 @@ public class Principal extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
-
-//		String nocturno = request.getParameter("nocturno");
-//
-//		if (nocturno == "si") {
-//			session.setAttribute("nocturno", "si");
-//		} else {
-//
-//		}
-
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		// Obtengo un dispatcher hacia el jsp
-//		String modo = (String) session.getAttribute("nocturno");
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaPrincipal.jsp");
+		String modo = request.getParameter("modo");
+		modo = modoEJB.actualizarModo(usuario, modo);
 
-//		if (modo == null) {
-//			rs = getServletContext().getRequestDispatcher("/aplicacion/vista/PaginaPrincipal.jsp");
-//		} else {
-//			rs = getServletContext().getRequestDispatcher("/nocturno/PaginaPrincipal.jsp");
-//		}
+		// Obtengo un dispatcher hacia el jsp
+		RequestDispatcher rs = getServletContext().getRequestDispatcher(modoEJB.obtenerRuta(modo, PAGINA));
 
 		// Añado el objeto a la petición
 		request.setAttribute("usuario", usuario);
@@ -102,14 +93,11 @@ public class Principal extends HttpServlet {
 			}
 		}
 
+		String modo = request.getParameter("modo");
+		modo = modoEJB.actualizarModo(usuario, modo);
+
 		// Obtengo un dispatcher hacia el jsp
-		String modo = (String) session.getAttribute("nocturno");
-		RequestDispatcher rs = null;
-		if (modo == null) {
-			rs = getServletContext().getRequestDispatcher("/PaginaPrincipal.jsp");
-		} else {
-			rs = getServletContext().getRequestDispatcher("/nocturno/PaginaPrincipal.jsp");
-		}
+		RequestDispatcher rs = getServletContext().getRequestDispatcher(modoEJB.obtenerRuta(modo, PAGINA));
 
 		// Añado los objetos a la petición
 		request.setAttribute("usuario", usuario);

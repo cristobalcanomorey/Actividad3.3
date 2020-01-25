@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aplicacion.modelo.LogSingleton;
+import aplicacion.modelo.ejb.ModoEJB;
 import aplicacion.modelo.ejb.UsuariosEJB;
 
 /***
@@ -22,9 +23,13 @@ import aplicacion.modelo.ejb.UsuariosEJB;
 @WebServlet("/Validacion")
 public class Validacion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String PAGINA = "PaginaValidacion";
 
 	@EJB
 	UsuariosEJB usuariosEJB;
+
+	@EJB
+	ModoEJB modoEJB;
 
 	/***
 	 * Si no encuentra el código en BBDD muestra la página de error, si no, valida
@@ -34,11 +39,12 @@ public class Validacion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		LogSingleton log = LogSingleton.getInstance();
 		String codigo = request.getParameter("codigo");
+		String modo = request.getParameter("modo");
 		if (codigo != null) {
 			boolean caducado = usuariosEJB.validar(codigo);
 			if (caducado) {
 				// Obtengo un dispatcher hacia el jsp
-				RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaValidacion.jsp");
+				RequestDispatcher rs = getServletContext().getRequestDispatcher(modoEJB.obtenerRuta(modo, PAGINA));
 
 				// Hago un forward al jsp con el objeto ya dentro de la petición
 				try {
@@ -48,14 +54,14 @@ public class Validacion extends HttpServlet {
 				}
 			} else {
 				try {
-					response.sendRedirect("Principal");
+					response.sendRedirect("Principal?modo=" + modo);
 				} catch (IOException e) {
 					log.getLoggerValidacion().error("Se ha producido un error en GET Validacion: ", e);
 				}
 			}
 		} else {
 			try {
-				response.sendRedirect("Principal");
+				response.sendRedirect("Principal?modo=" + modo);
 			} catch (IOException e) {
 				log.getLoggerValidacion().error("Se ha producido un error en GET Validacion: ", e);
 			}

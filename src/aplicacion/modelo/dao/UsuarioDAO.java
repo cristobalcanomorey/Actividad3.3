@@ -65,6 +65,7 @@ public class UsuarioDAO {
 	 */
 	public static void insertUsuario(Usuario nuevo) {
 		int esValidado = nuevo.isValidado() ? 1 : 0;
+		int modoNocturno = nuevo.getModoNocturno() ? 1 : 0;
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		Map<String, Object> usuario = new HashMap<String, Object>();
 		usuario.put("correo", nuevo.getCorreo());
@@ -73,6 +74,7 @@ public class UsuarioDAO {
 		usuario.put("foto", nuevo.getFoto());
 		usuario.put("esValidado", esValidado);
 		usuario.put("fecha", UsuariosEJB.fechaAString(nuevo.getFechaRegistro()));
+		usuario.put("modoNocturno", modoNocturno);
 		try {
 			UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
 			usuariosMapper.insertUsuario(usuario);
@@ -145,5 +147,28 @@ public class UsuarioDAO {
 		} finally {
 			sqlSession.close();
 		}
+	}
+
+	/***
+	 * Cambia el modo del usuario
+	 * 
+	 * @param modo    Modo de la vista
+	 * @param usuario Usuario
+	 * @return Usuario con los datos actualizados
+	 */
+	public static Usuario cambiarModo(String modo, Usuario usuario) {
+		int m = 0;
+		if (modo.equals("nocturno")) {
+			m = 1;
+		}
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
+			usuariosMapper.cambiarModo(m, usuario.getId().toString());
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+		return selectPorId(usuario.getId().toString());
 	}
 }

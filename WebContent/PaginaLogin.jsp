@@ -24,17 +24,19 @@
 	%>
 	<ul id="navegacion">
 		<li>
-			<a href="Principal">
+			<a href="Principal?modo=diurno">
 				<img src="imgs/logo.png">
 			</a>
 		</li>
 	</ul>
+	<a href="Login?modo=nocturno">Modo nocturno</a>
 	<h1>Iniciar sesión</h1>
 	<form method="POST" action="Login">
 		<p>Correo</p>
 		<input name="correo" type="email">
 		<p>Contraseña</p>
 		<input name="paswd" type="password">
+		<input type="hidden" name="modo" value="diurno">
 		<input type="submit" value="Iniciar sesión">
 	</form>
 	<%
