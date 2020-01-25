@@ -1,21 +1,20 @@
-package aplicacion.modelo;
+package aplicacion.modelo.ejb;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
+import javax.ejb.Timer;
 
-import aplicacion.modelo.ejb.AltasBajasEJB;
-import aplicacion.modelo.ejb.MailEJB;
-import aplicacion.modelo.ejb.UsuariosEJB;
+import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.pojo.AltaBaja;
 import aplicacion.modelo.pojo.Mail;
 import aplicacion.vista.MensajeAltasBajas;
 
-@Singleton
-public class TimerSingleton {
+@Stateless
+public class TimerEJB {
 
 	@EJB
 	UsuariosEJB usuariosEJB;
@@ -28,8 +27,12 @@ public class TimerSingleton {
 
 	private final String CORREO_JEFE = "tribot@gmail.com";
 
-	@Schedule(hour = "0", minute = "*/5", second = "0", persistent = false)
-	public void corre() {
+	public TimerEJB() {
+	}
+
+	@SuppressWarnings("unused")
+	@Schedule(second = "*", minute = "*/5", hour = "*", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "TimerEJB")
+	private void scheduledTimeout(final Timer t) {
 		LogSingleton log = LogSingleton.getInstance();
 		usuariosEJB.limpiar();
 		try {
@@ -50,4 +53,5 @@ public class TimerSingleton {
 		}
 		return mailEJB.sendMail(CORREO_JEFE, mensajeAltasBajas.getMensaje().toString(), tabla, correo);
 	}
+
 }

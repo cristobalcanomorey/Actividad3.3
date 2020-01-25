@@ -16,6 +16,7 @@ import aplicacion.modelo.dao.MyBatisUtil;
 import aplicacion.modelo.dao.UsuarioDAO;
 import aplicacion.modelo.dao.ValidacionDAO;
 import aplicacion.modelo.ejb.MailEJB;
+import aplicacion.modelo.ejb.TimerEJB;
 
 public class LogSingleton {
 	private static final LogSingleton INSTANCE = new LogSingleton();
@@ -31,7 +32,7 @@ public class LogSingleton {
 	private Logger loggerValidacion = LoggerFactory.getLogger(Validacion.class);
 	private Logger loggerBaja = LoggerFactory.getLogger(Baja.class);
 	private Logger loggerAltasBajasDAO = LoggerFactory.getLogger(AltasBajasDAO.class);
-	private Logger loggerTimerSingleton = LoggerFactory.getLogger(TimerSingleton.class);
+	private Logger loggerTimerEJB = LoggerFactory.getLogger(TimerEJB.class);
 	private Logger loggerMyBatisUtil = LoggerFactory.getLogger(MyBatisUtil.class);
 
 	/**
@@ -163,7 +164,7 @@ public class LogSingleton {
 	 * @return Logger
 	 */
 	public Logger getLoggerTimerSingleton() {
-		return loggerTimerSingleton;
+		return loggerTimerEJB;
 	}
 
 	public Logger getLoggerMyBatisUtil() {
