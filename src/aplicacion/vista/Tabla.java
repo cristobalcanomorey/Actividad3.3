@@ -1,8 +1,6 @@
-package aplicacion.vista.html.especificos;
+package aplicacion.vista;
 
 import java.util.ArrayList;
-
-import aplicacion.vista.Tag;
 
 public class Tabla {
 
@@ -95,14 +93,4 @@ public class Tabla {
 		return prepararTabla().toString();
 	}
 
-	/***
-	 * Añade la tabla a la página
-	 * 
-	 * @param pagina Página a mostrar
-	 * @return Html con la tabla añadida
-	 */
-	public Html addAPagina(Html pagina) {
-		pagina.addABody(prepararTabla());
-		return pagina;
-	}
 }
